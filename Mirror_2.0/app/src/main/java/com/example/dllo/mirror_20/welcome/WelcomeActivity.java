@@ -3,7 +3,7 @@ package com.example.dllo.mirror_20.welcome;
 import android.content.Intent;
 import android.os.CountDownTimer;
 
-import com.example.dllo.mirror_20.MainActivity;
+import com.example.dllo.mirror_20.main.MainActivity;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
 
