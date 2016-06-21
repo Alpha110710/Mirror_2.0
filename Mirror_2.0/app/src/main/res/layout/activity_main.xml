@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.dllo.mirror_20.MainActivity">
+    android:background="@mipmap/bg">
 
-    <TextView
+    <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="30px"
+            android:drawablePadding="38px"
+            android:drawableRight="@mipmap/pull"
+            android:text="浏览平光眼镜"
+            android:textColor="@color/colorWhite"
+            android:textSize="60px" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="15px"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="14px"
+            android:background="@mipmap/lineundertitle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="26px"
+            android:text="显示排序为 最新推荐"
+            android:textColor="@color/colorWhite" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>
