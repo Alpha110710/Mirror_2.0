@@ -1,8 +1,10 @@
 package com.example.dllo.mirror_20.allcategories;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -17,6 +19,7 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by dllo on 16/6/21.
@@ -47,14 +50,8 @@ public class AllCategoriesDetailActivity extends BaseActivity {
         }
     };
 
-    //    private View.OnScrollChangeListener onScrollChangeListener = new View.OnScrollChangeListener() {
-//        @Override
-//        public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//            Log.d("AllCategoriesDetailActi", "scrollY:" + scrollY);
-//        }
-//    };
     private ImageView allCategoriesDetailBackImg;
-    private ListView allCategoriesDetailOutListView;
+    private ListView allCategoriesDetailOutListView, allCategoriesDetailInListView;
     private DetailActivityOutListViewAdapter detailActivityOutListViewAdapter;
     private RelativeLayout relativeheaderTranslucentBackRlayoutLayout;
     private AccelerateDecelerateInterpolator mSmoothInterpolator;
@@ -65,6 +62,7 @@ public class AllCategoriesDetailActivity extends BaseActivity {
 
         allCategoriesDetailBackImg = (ImageView) findViewById(R.id.all_categories_detail_back_img);
         allCategoriesDetailOutListView = (ListView) findViewById(R.id.all_categories_detail_out_list_view);
+        allCategoriesDetailInListView = (ListView)findViewById(R.id.all_categories_detail_in_list_view);
 
 
         detailActivityOutListViewAdapter = new DetailActivityOutListViewAdapter(this);
@@ -74,6 +72,7 @@ public class AllCategoriesDetailActivity extends BaseActivity {
         relativeheaderTranslucentBackRlayoutLayout = (RelativeLayout) view.findViewById(R.id.header_translucent_back_rlayout);
 
         allCategoriesDetailOutListView.addHeaderView(view);
+        allCategoriesDetailInListView.addHeaderView(view);
 
 
         initData();
@@ -109,6 +108,7 @@ public class AllCategoriesDetailActivity extends BaseActivity {
 //            }
 //        });
 //
+
     }
 
 //    float pos = 0f;
