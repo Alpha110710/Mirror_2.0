@@ -1,12 +1,15 @@
 package com.example.dllo.mirror_20.Bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by dllo on 16/6/21.
  */
 public class DataAllBean {
-
 
 
     private String result;
@@ -96,11 +99,27 @@ public class DataAllBean {
             }
         }
 
-        public static class ListBean {
+        public static class ListBean implements Parcelable {
             private String type;
 
 
             private DataInfoBean data_info;
+
+            protected ListBean(Parcel in) {
+                type = in.readString();
+            }
+
+            public static final Creator<ListBean> CREATOR = new Creator<ListBean>() {
+                @Override
+                public ListBean createFromParcel(Parcel in) {
+                    return new ListBean(in);
+                }
+
+                @Override
+                public ListBean[] newArray(int size) {
+                    return new ListBean[size];
+                }
+            };
 
             public String getType() {
                 return type;
@@ -118,7 +137,17 @@ public class DataAllBean {
                 this.data_info = data_info;
             }
 
-            public static class DataInfoBean {
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(type);
+            }
+
+            public static class DataInfoBean  {
                 private String goods_id;
                 private String goods_pic;
                 private String model;
@@ -134,15 +163,27 @@ public class DataAllBean {
                 private String brand;
                 private String info_des;
                 private String goods_share;
-
+                private String story_title;
+                private String story_img;
                 private List<GoodsDataBean> goods_data;
-                /**
-                 * img : http://image.mirroreye.cn/1f303e3a880ba784968b503c2fbd4da87.jpg
-                 * cellHeight : 480
-                 * type : 1
-                 */
-
+            
                 private List<DesignDesBean> design_des;
+
+                public String getStory_title() {
+                    return story_title;
+                }
+
+                public void setStory_title(String story_title) {
+                    this.story_title = story_title;
+                }
+
+                public String getStory_img() {
+                    return story_img;
+                }
+
+                public void setStory_img(String story_img) {
+                    this.story_img = story_img;
+                }
 
                 public String getGoods_id() {
                     return goods_id;
