@@ -3,6 +3,7 @@ package com.example.dllo.mirror_20.allcategories;
 import android.view.View;
 
 
+import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
 
 /**
