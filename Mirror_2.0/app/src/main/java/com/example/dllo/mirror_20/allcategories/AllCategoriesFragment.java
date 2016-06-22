@@ -23,7 +23,6 @@ import com.zhy.autolayout.AutoLinearLayout;
  */
 
 
-
 public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickListener, View.OnClickListener {
 
     private RecyclerView recyclerView;
@@ -33,11 +32,7 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
     private AllCategoriesRVAdapter adapter;
     private AutoLinearLayout autoLinearLayout;
     private String url = "http://lizhongren.com.cn/mengke/jsonhandle.php";
-    private MainActivity.MenuOnClickListener menuOnClickListener;
 
-    public void setMenuOnClickListener(MainActivity.MenuOnClickListener menuOnClickListener) {
-        this.menuOnClickListener = menuOnClickListener;
-    }
 
     @Override
     public int setLayout() {
@@ -52,10 +47,8 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
     }
 
 
-
     @Override
     public void initData() {
-
 
 
         progressBar.setVisibility(View.VISIBLE);
@@ -67,7 +60,7 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
             @Override
             public void onSuccessed(String result) {
                 Gson gson = new Gson();
-                bean = gson.fromJson(result,DataAllBean.class);
+                bean = gson.fromJson(result, DataAllBean.class);
                 adapter.setBean(bean);
                 LinearLayoutManager manager = new LinearLayoutManager(context);
                 manager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -91,9 +84,9 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
     @Override
     public void onClick(int position) {
         Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(context,AllCategoriesDetailActivity.class);
+        Intent intent = new Intent(context, AllCategoriesDetailActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable("newBean",bean.getData().getList().get(position));
+        bundle.putParcelable("newBean", bean.getData().getList().get(position));
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -101,7 +94,12 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
     //fragment头标题的点击事件
     @Override
     public void onClick(View v) {
-        Toast.makeText(context, "别点了，还没加效果呢", Toast.LENGTH_SHORT).show();
 
+        ((MenuOnClickListener) getActivity()).menuOnClick();
+
+    }
+
+    public interface MenuOnClickListener {
+        void menuOnClick();
     }
 }
