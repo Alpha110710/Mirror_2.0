@@ -26,8 +26,6 @@
 =======
         <activity android:name=".login.RegisterActivity" />
 
-        <activity android:name=".AllCategoriesDetailActivity" />
-
 
         <meta-data
             android:name="design_width"

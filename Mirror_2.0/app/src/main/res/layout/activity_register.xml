@@ -30,6 +30,7 @@ android:background="@color/light_grey"
             android:background="@mipmap/linecreateuser" />
 
         <ImageView
+            android:id="@+id/register_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/line_create_user"
@@ -70,13 +71,29 @@ android:background="@color/light_grey"
             android:layout_height="wrap_content"
             android:text="@string/verification_code"
             android:textSize="24px" />
-        <EditText
-            android:id="@+id/activity_register_verification_code"
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60px"
-            android:background="@color/colorWhite"
             android:layout_marginTop="20px"
+            android:layout_height="60px"
+            android:orientation="horizontal">
+        <EditText
+            android:layout_weight="2"
+            android:id="@+id/activity_register_verification_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
             />
+            <Button
+                android:id="@+id/register_send_verification"
+                android:textColor="@android:color/white"
+                android:background="@mipmap/yanzhengcodepressbutton"
+                android:text="@string/send_verification"
+                android:textSize="26px"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
         <TextView
             android:textColor="@android:color/black"
             android:layout_marginTop="30px"
