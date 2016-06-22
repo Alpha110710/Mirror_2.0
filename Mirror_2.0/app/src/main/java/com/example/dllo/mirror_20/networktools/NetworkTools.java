@@ -43,7 +43,7 @@ public class NetworkTools {
         requestQueue.add(request);
     }
 
-    public void getNetworkPostData(String url, final Map<String, String> map, final String body, final NetworkListener listener) {
+    public void getNetworkPostData(String url, final Map<String, String> map, final NetworkListener listener) {
         StringRequest requestPost = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -55,13 +55,10 @@ public class NetworkTools {
                 listener.onFailed(error);
             }
         }) {
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                return body.getBytes();
-            }
+
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError {
                 return map;
             }
         };
