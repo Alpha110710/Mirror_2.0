@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.dllo.mirror_20.FirstFragment;
 import com.example.dllo.mirror_20.R;
-import com.example.dllo.mirror_20.SecondFragment;
+
+import com.example.dllo.mirror_20.allcategories.SecondFragment;
 import com.example.dllo.mirror_20.allcategories.AllCategoriesFragment;
 import com.example.dllo.mirror_20.view.VerticalViewPager;
 

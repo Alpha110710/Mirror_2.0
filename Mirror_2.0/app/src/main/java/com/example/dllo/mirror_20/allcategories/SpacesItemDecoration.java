@@ -1,4 +1,4 @@
-package com.example.dllo.mirror_20;
+package com.example.dllo.mirror_20.allcategories;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dllo.mirror_20.DataAllBean;
+import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.zhy.autolayout.AutoRelativeLayout;

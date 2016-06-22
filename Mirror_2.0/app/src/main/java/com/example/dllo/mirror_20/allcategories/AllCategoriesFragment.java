@@ -5,9 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.android.volley.VolleyError;
-import com.example.dllo.mirror_20.DataAllBean;
+import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
-import com.example.dllo.mirror_20.SpacesItemDecoration;
 import com.example.dllo.mirror_20.base.BaseFragment;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
