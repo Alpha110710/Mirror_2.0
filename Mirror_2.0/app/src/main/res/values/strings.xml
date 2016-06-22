@@ -4,5 +4,7 @@
     <string name="phone_number">手机号</string>
     <string name="verification_code">验证码</string>
     <string name="set_password">设置密码</string>
+    <string name="id_login">账号登录</string>
+    <string name="password">密码</string>
 
 </resources>

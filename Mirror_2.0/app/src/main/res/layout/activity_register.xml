@@ -2,21 +2,23 @@
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:background="@color/light_grey"
     android:orientation="vertical">
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30px"
-        android:layout_marginTop="30px">
+        android:layout_marginTop="30px"
+        android:background="@color/light_grey">
 
         <TextView
             android:id="@+id/creat_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ID_create"
-            android:textSize="60px" />
+            android:textColor="@android:color/black"
+            android:textSize="34px" />
 
         <ImageView
             android:id="@+id/line_create_user"
@@ -44,55 +46,58 @@
         android:layout_marginLeft="30px"
         android:layout_marginRight="30px"
         android:layout_marginTop="40px"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/light_grey">
 
         <TextView
+            android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/phone_number"
-            android:textSize="50px" />
+            android:textSize="24px" />
         <EditText
             android:id="@+id/activity_register_phoneNumber"
             android:layout_marginTop="20px"
             android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:background="@null"
+            android:layout_height="60px"
+            android:background="@color/colorWhite"
 
             />
         <TextView
+            android:textColor="@android:color/black"
             android:layout_marginTop="30px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/verification_code"
-            android:textSize="50px" />
+            android:textSize="24px" />
         <EditText
             android:id="@+id/activity_register_verification_code"
             android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:background="@null"
+            android:layout_height="60px"
+            android:background="@color/colorWhite"
             android:layout_marginTop="20px"
             />
         <TextView
+            android:textColor="@android:color/black"
             android:layout_marginTop="30px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/set_password"
-            android:textSize="50px" />
+            android:textSize="24px" />
         <EditText
             android:id="@+id/activity_register_set_password"
             android:layout_width="match_parent"
-            android:layout_height="100px"
-
+            android:layout_height="60px"
             android:layout_marginTop="20px"
-            android:background="#FFFFFF"
+            android:background="@color/colorWhite"
             />
         <Button
             android:layout_marginTop="50px"
             android:textColor="@android:color/white"
-            android:textSize="60px"
+            android:textSize="34px"
             android:text="@string/ID_create"
             android:layout_width="match_parent"
-            android:layout_height="120px"
+            android:layout_height="80px"
             android:background="@mipmap/createuserbuttton"
             android:id="@+id/register_create_id"/>
 
