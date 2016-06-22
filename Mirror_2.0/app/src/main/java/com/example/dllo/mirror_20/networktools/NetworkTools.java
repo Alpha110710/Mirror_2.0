@@ -70,7 +70,7 @@ public class NetworkTools {
 
 
     public void getNetworkImage(String url, ImageView imageView) {
-        loader.get(url, new ImageListenerWithAlpha(R.mipmap.ic_launcher, R.mipmap.ic_launcher, imageView));
+        loader.get(url, new ImageListenerWithAlpha(R.mipmap.bg, R.mipmap.bg, imageView));
     }
 
 
@@ -89,9 +89,13 @@ public class NetworkTools {
         public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
             if (response.getBitmap() != null) {
                 imageView.setImageBitmap(response.getBitmap());
+<<<<<<< HEAD
                 ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView, "alpha", 0, 1);
-                objectAnimator.setDuration(5000);
+                objectAnimator.setDuration(1000);
                 objectAnimator.start();
+=======
+
+>>>>>>> feature/NetworkTools
             } else if (defaultIma != 0) {
                 imageView.setImageResource(defaultIma);
             }
