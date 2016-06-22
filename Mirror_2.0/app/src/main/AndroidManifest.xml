@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dllo.mirror_20">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".base.App"
         android:allowBackup="true"
@@ -20,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+        <activity android:name=".login.RegisterActivity"/>
+        <activity android:name=".MainActivity"/>
+    <meta-data android:name="design_width"
+        android:value="720"/>
+    <meta-data android:name="design_height"
+        android:value="1280"/>
+=======
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".main.MainActivity"/>
         <activity android:name=".AllCategoriesDetailActivity" />
@@ -32,6 +36,7 @@
         <meta-data
             android:name="design_height"
             android:value="1280" />
+>>>>>>> cbf3740d128efe3efe78204c888f45aba8a145a0
     </application>
 
 </manifest>
