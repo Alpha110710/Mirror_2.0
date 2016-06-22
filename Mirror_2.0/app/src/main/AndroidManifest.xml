@@ -19,9 +19,9 @@
         <activity android:name=".login.RegisterActivity"/>
         <activity android:name=".MainActivity"/>
     <meta-data android:name="design_width"
-        android:value="1080"/>
+        android:value="720"/>
     <meta-data android:name="design_height"
-        android:value="1920"/>
+        android:value="1280"/>
     </application>
 
 </manifest>
