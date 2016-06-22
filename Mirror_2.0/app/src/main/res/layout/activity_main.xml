@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-<<<<<<< HEAD
     android:layout_height="match_parent">
 
     <com.example.dllo.mirror_20.view.VerticalViewPager
         android:id="@+id/main_vertical_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-=======
-    android:layout_height="match_parent"
-    android:background="@mipmap/bg">
-
-    <FrameLayout
-        android:id="@+id/frameLayout_main"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
->>>>>>> feature/NetworkTools
+        android:layout_height="50dp"
+        android:text="你好"/>
 </com.zhy.autolayout.AutoLinearLayout>

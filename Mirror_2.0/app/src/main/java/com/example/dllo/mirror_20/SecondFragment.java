@@ -1,5 +1,7 @@
 package com.example.dllo.mirror_20;
 
+import android.view.View;
+
 import com.example.dllo.mirror_20.base.BaseFragment;
 
 /**
@@ -13,9 +15,10 @@ public class SecondFragment extends BaseFragment {
     }
 
     @Override
-    public void initView() {
+    public void initView(View view) {
 
     }
+
 
     @Override
     public void initData() {

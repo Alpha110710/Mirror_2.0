@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.RegisterActivity" />
-
+        <activity android:name=".main.MainActivity"/>
         <activity android:name=".AllCategoriesDetailActivity" />
 
 
