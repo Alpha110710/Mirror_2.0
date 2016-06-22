@@ -3,9 +3,80 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<TextView
-    android:id="@+id/item_detail_activity_out_listview_tv"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="1111"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/colorBlack">
+
+        <ImageView
+            android:id="@+id/item_detail_activity_out_up_line_img"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/lineundertitle" />
+
+        <TextView
+            android:id="@+id/item_detail_activity_out_country_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/item_detail_activity_out_up_line_img"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="韓國"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_detail_activity_out_location_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_detail_activity_out_up_line_img"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/item_detail_activity_out_country_tv"
+            android:text="來自時尚之都韓國"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/item_detail_activity_out_english_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_detail_activity_out_location_tv"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/item_detail_activity_out_country_tv"
+            android:text="The frame comes from Korea"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/item_detail_activity_out_down_line_img"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_below="@id/item_detail_activity_out_english_tv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/lineundertitle" />
+
+        <TextView
+            android:id="@+id/item_detail_activity_out_intro_content_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_detail_activity_out_down_line_img"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="作为韩国潮牌太阳镜，SPRING STRINGS被许多国际人士所热爱。包括韩国女团T-ARA,SISTAR以及各路来自全国各地的潮人都经常配戴，是时尚达人不可或缺的太阳镜。"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp" />
+    </RelativeLayout>
 </LinearLayout>

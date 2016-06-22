@@ -10,14 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
+
     <ListView
         android:id="@+id/all_categories_detail_in_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:divider="@null" />
 
     <ListView
         android:id="@+id/all_categories_detail_out_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transport"/>
+        android:background="@color/transport"
+        android:divider="@null" />
 </com.zhy.autolayout.AutoRelativeLayout>
