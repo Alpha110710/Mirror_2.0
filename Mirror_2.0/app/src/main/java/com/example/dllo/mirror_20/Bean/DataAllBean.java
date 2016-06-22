@@ -8,7 +8,6 @@ import java.util.List;
 public class DataAllBean {
 
 
-
     private String result;
     private String msg;
 
@@ -134,15 +133,27 @@ public class DataAllBean {
                 private String brand;
                 private String info_des;
                 private String goods_share;
-
+                private String story_title;
+                private String story_img;
                 private List<GoodsDataBean> goods_data;
-                /**
-                 * img : http://image.mirroreye.cn/1f303e3a880ba784968b503c2fbd4da87.jpg
-                 * cellHeight : 480
-                 * type : 1
-                 */
-
+            
                 private List<DesignDesBean> design_des;
+
+                public String getStory_title() {
+                    return story_title;
+                }
+
+                public void setStory_title(String story_title) {
+                    this.story_title = story_title;
+                }
+
+                public String getStory_img() {
+                    return story_img;
+                }
+
+                public void setStory_img(String story_img) {
+                    this.story_img = story_img;
+                }
 
                 public String getGoods_id() {
                     return goods_id;
