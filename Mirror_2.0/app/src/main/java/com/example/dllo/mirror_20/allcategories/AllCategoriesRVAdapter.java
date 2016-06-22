@@ -1,19 +1,16 @@
 package com.example.dllo.mirror_20.allcategories;
 
 import android.content.Context;
-import android.content.pm.LabeledIntent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dllo.mirror_20.DataAllBean;
+import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
-import com.squareup.picasso.Picasso;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 /**

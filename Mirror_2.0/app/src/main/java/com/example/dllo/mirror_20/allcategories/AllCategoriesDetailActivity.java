@@ -1,16 +1,15 @@
-package com.example.dllo.mirror_20;
+package com.example.dllo.mirror_20.allcategories;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
+import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
