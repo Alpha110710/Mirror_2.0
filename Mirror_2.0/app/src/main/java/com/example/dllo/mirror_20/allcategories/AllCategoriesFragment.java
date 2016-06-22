@@ -8,19 +8,28 @@ import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
+import com.example.dllo.mirror_20.main.MainActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.google.gson.Gson;
+import com.zhy.autolayout.AutoLinearLayout;
 
 /**
  * Created by dllo on 16/6/21.
  */
-public class AllCategoriesFragment extends BaseFragment {
+public class AllCategoriesFragment extends BaseFragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private NetworkTools tools;
     private DataAllBean bean;
     private AllCategoriesRVAdapter adapter;
     private String url = "http://lizhongren.com.cn/mengke/jsonhandle.php";
+    private AutoLinearLayout fragmentAllCategoriesLlayout;
+    private MainActivity.MenuOnClickListener menuOnClickListener;
+
+    public void setMenuOnClickListener(MainActivity.MenuOnClickListener menuOnClickListener) {
+        this.menuOnClickListener = menuOnClickListener;
+    }
+
     @Override
     public int setLayout() {
         return R.layout.fragment_allcategories;
@@ -29,12 +38,17 @@ public class AllCategoriesFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_all_categories_rv);
+        fragmentAllCategoriesLlayout = (AutoLinearLayout) view.findViewById(R.id.fragment_all_categories_llayout);
     }
 
 
 
     @Override
     public void initData() {
+
+        fragmentAllCategoriesLlayout.setOnClickListener(this);
+
+
         tools = new NetworkTools();
         adapter = new AllCategoriesRVAdapter(context);
 
@@ -57,5 +71,14 @@ public class AllCategoriesFragment extends BaseFragment {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.fragment_all_categories_llayout:
+                (MainActivity.MenuOnClickListener)getActivity().
+                break;
+        }
     }
 }
