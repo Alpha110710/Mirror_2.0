@@ -87,7 +87,7 @@ public class NetworkTools {
             if (response.getBitmap() != null) {
                 imageView.setImageBitmap(response.getBitmap());
                 ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView, "alpha", 0, 1);
-                objectAnimator.setDuration(1000);
+                objectAnimator.setDuration(500);
                 objectAnimator.start();
             } else if (defaultIma != 0) {
                 imageView.setImageResource(defaultIma);

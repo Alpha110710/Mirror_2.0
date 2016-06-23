@@ -13,7 +13,9 @@ import com.example.dllo.mirror_20.R;
 
 import com.squareup.picasso.Picasso;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
+import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
+import com.zhy.autolayout.utils.AutoUtils;
 
 /**
  * Created by dllo on 16/6/21.
@@ -23,6 +25,11 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
     private Context context;
     private DataAllBean bean;
     private NetworkTools tools;
+    private MyRvOnClickListener listener;
+
+    public void setListener(MyRvOnClickListener listener) {
+        this.listener = listener;
+    }
 
     public AllCategoriesRVAdapter(Context context) {
         this.context = context;
@@ -43,14 +50,14 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         String url = bean.getData().getList().get(position).getData_info().getGoods_img();
+        String url2 = bean.getData().getList().get(position).getData_info().getStory_img();
         switch (bean.getData().getList().get(position).getType()) {
             case "1":
                 holder.layout.setVisibility(View.VISIBLE);
-//                Picasso.with(context).load(url).fit().placeholder(R.mipmap.bg).into(holder.imageView);
                 holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                tools.getNetworkImage(url,holder.imageView);
+                tools.getNetworkImage(url, holder.imageView);
                 holder.englishTv.setText(bean.getData().getList().get(position).getData_info().getGoods_name());
                 holder.moneyTv.setText("¥" + bean.getData().getList().get(position).getData_info().getGoods_price());
                 holder.originTv.setText(bean.getData().getList().get(position).getData_info().getProduct_area());
@@ -58,10 +65,19 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
                 break;
             case "2":
                 holder.layout.setVisibility(View.GONE);
-                holder.imageView.setImageResource(R.mipmap.ic_launcher);
-                holder.introduceTv.setText("整啥玩意呢");
+                tools.getNetworkImage(url2, holder.imageView);
+                holder.introduceTv.setText(bean.getData().getList().get(position).getData_info().getStory_title());
+
                 break;
 
+        }
+        if (listener != null) {
+            holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(holder.getLayoutPosition());
+                }
+            });
         }
 
     }
@@ -75,15 +91,20 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
         ImageView imageView;
         TextView englishTv, moneyTv, originTv, introduceTv;
         AutoRelativeLayout layout;
+        AutoLinearLayout linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            AutoUtils.autoSize(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.all_categories_rv_item_iv);
             englishTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_english);
             moneyTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_money);
             originTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_origin);
             introduceTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_introduce);
             layout = (AutoRelativeLayout) itemView.findViewById(R.id.layout);
+            linearLayout = (AutoLinearLayout) itemView.findViewById(R.id.all_categories_rv_item_ll);
         }
     }
+
+
 }
