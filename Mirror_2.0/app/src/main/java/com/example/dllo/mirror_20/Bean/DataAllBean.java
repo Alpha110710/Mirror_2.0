@@ -147,7 +147,7 @@ public class DataAllBean {
                 dest.writeString(type);
             }
 
-            public static class DataInfoBean  {
+            public static class DataInfoBean implements Parcelable  {
                 private String goods_id;
                 private String goods_pic;
                 private String model;
@@ -168,6 +168,38 @@ public class DataAllBean {
                 private List<GoodsDataBean> goods_data;
             
                 private List<DesignDesBean> design_des;
+
+                protected DataInfoBean(Parcel in) {
+                    goods_id = in.readString();
+                    goods_pic = in.readString();
+                    model = in.readString();
+                    goods_img = in.readString();
+                    goods_name = in.readString();
+                    last_storge = in.readString();
+                    whole_storge = in.readString();
+                    height = in.readString();
+                    ordain = in.readString();
+                    product_area = in.readString();
+                    goods_price = in.readString();
+                    discount_price = in.readString();
+                    brand = in.readString();
+                    info_des = in.readString();
+                    goods_share = in.readString();
+                    story_title = in.readString();
+                    story_img = in.readString();
+                }
+
+                public static final Creator<DataInfoBean> CREATOR = new Creator<DataInfoBean>() {
+                    @Override
+                    public DataInfoBean createFromParcel(Parcel in) {
+                        return new DataInfoBean(in);
+                    }
+
+                    @Override
+                    public DataInfoBean[] newArray(int size) {
+                        return new DataInfoBean[size];
+                    }
+                };
 
                 public String getStory_title() {
                     return story_title;
@@ -319,6 +351,32 @@ public class DataAllBean {
 
                 public void setDesign_des(List<DesignDesBean> design_des) {
                     this.design_des = design_des;
+                }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(goods_id);
+                    dest.writeString(goods_pic);
+                    dest.writeString(model);
+                    dest.writeString(goods_img);
+                    dest.writeString(goods_name);
+                    dest.writeString(last_storge);
+                    dest.writeString(whole_storge);
+                    dest.writeString(height);
+                    dest.writeString(ordain);
+                    dest.writeString(product_area);
+                    dest.writeString(goods_price);
+                    dest.writeString(discount_price);
+                    dest.writeString(brand);
+                    dest.writeString(info_des);
+                    dest.writeString(goods_share);
+                    dest.writeString(story_title);
+                    dest.writeString(story_img);
                 }
 
                 public static class GoodsDataBean {

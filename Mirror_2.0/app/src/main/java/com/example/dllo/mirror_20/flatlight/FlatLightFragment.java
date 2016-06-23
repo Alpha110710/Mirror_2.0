@@ -1,33 +1,35 @@
-package com.example.dllo.mirror_20.allcategories;
+package com.example.dllo.mirror_20.flatlight;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
+import com.example.dllo.mirror_20.allcategories.AllCategoriesDetailActivity;
+import com.example.dllo.mirror_20.allcategories.AllCategoriesRVAdapter;
+import com.example.dllo.mirror_20.allcategories.MyRvOnClickListener;
 import com.example.dllo.mirror_20.base.BaseFragment;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.google.gson.Gson;
 import com.zhy.autolayout.AutoLinearLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by dllo on 16/6/21.
+ * 平面镜的Fragment
  */
-public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickListener, View.OnClickListener {
+public class FlatLightFragment extends BaseFragment implements MyRvOnClickListener, View.OnClickListener {
     private RecyclerView recyclerView;
     private NetworkTools tools;
     private DataAllBean bean;
+    private TextView textView;
     private ProgressBar progressBar;
     private AllCategoriesRVAdapter adapter;
     private AutoLinearLayout autoLinearLayout;
@@ -39,6 +41,7 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
 
     @Override
     public void initView(View view) {
+        textView = (TextView) view.findViewById(R.id.title_text_view);
         progressBar = (ProgressBar) view.findViewById(R.id.all_categories_progress_bar);
         autoLinearLayout = (AutoLinearLayout) view.findViewById(R.id.fragment_all_categories_autoll);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_all_categories_rv);
@@ -48,6 +51,7 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
 
     @Override
     public void initData() {
+        textView.setText("浏览平光镜     ");
         progressBar.setVisibility(View.VISIBLE);
         tools = new NetworkTools();
         adapter = new AllCategoriesRVAdapter(context);
