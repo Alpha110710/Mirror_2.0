@@ -90,6 +90,7 @@ public class NetworkTools {
             } else if (defaultIma != 0) {
                 imageView.setImageResource(defaultIma);
             }
+
         }
 
         @Override
@@ -97,4 +98,6 @@ public class NetworkTools {
 
         }
     }
+
+
 }

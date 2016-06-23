@@ -464,7 +464,8 @@ public class DataAllBean implements Parcelable {
                     dest.writeString(story_img);
                 }
 
-                public static class GoodsDataBean implements Parcelable {
+
+                public static class GoodsDataBean {
                     private String introContent;
                     private String cellHeight;
                     private String name;
@@ -541,19 +542,6 @@ public class DataAllBean implements Parcelable {
                         this.english = english;
                     }
 
-                    @Override
-                    public int describeContents() {
-                        return 0;
-                    }
-
-                    @Override
-                    public void writeToParcel(Parcel dest, int flags) {
-                        dest.writeString(introContent);
-                        dest.writeString(cellHeight);
-                        dest.writeString(name);
-                        dest.writeString(location);
-                        dest.writeString(country);
-                        dest.writeString(english);
                     }
                 }
 
@@ -619,4 +607,3 @@ public class DataAllBean implements Parcelable {
             }
         }
     }
-}

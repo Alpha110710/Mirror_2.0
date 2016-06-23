@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
+
+import com.squareup.picasso.Picasso;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -56,6 +59,7 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
                 holder.layout.setVisibility(View.VISIBLE);
                 holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 tools.getNetworkImage(url, holder.imageView);
+
                 holder.englishTv.setText(bean.getData().getList().get(position).getData_info().getGoods_name());
                 holder.moneyTv.setText("¥" + bean.getData().getList().get(position).getData_info().getGoods_price());
                 holder.originTv.setText(bean.getData().getList().get(position).getData_info().getProduct_area());
@@ -64,6 +68,7 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
             case "2":
                 holder.layout.setVisibility(View.GONE);
                 tools.getNetworkImage(url2, holder.imageView);
+
                 holder.introduceTv.setText(bean.getData().getList().get(position).getData_info().getStory_title());
 
                 break;
@@ -90,6 +95,7 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
         TextView englishTv, moneyTv, originTv, introduceTv;
         AutoRelativeLayout layout;
         AutoLinearLayout linearLayout;
+        ProgressBar bar;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -101,6 +107,7 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
             introduceTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_introduce);
             layout = (AutoRelativeLayout) itemView.findViewById(R.id.layout);
             linearLayout = (AutoLinearLayout) itemView.findViewById(R.id.all_categories_rv_item_ll);
+            bar = (ProgressBar) itemView.findViewById(R.id.all_categories_rv_item_pb);
         }
     }
 
