@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
 
-
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".allcategories.AllCategoriesDetailActivity" />
         <activity android:name=".main.MainActivity" />
