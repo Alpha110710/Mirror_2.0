@@ -22,6 +22,7 @@
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".allcategories.AllCategoriesDetailActivity" />
         <activity android:name=".main.MainActivity" />
+        <activity android:name=".login.LoginActivity"/>
 
         <meta-data
             android:name="design_width"

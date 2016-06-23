@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
+
+import com.squareup.picasso.Picasso;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
