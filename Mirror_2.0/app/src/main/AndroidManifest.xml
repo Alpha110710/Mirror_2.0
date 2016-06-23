@@ -22,7 +22,9 @@
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".allcategories.AllCategoriesDetailActivity" />
         <activity android:name=".main.MainActivity" />
-        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.LoginActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".fashion.FashionActivity"/>
 
         <meta-data
             android:name="design_width"

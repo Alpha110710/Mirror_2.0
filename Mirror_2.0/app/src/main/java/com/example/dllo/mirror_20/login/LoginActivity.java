@@ -1,6 +1,7 @@
 package com.example.dllo.mirror_20.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
@@ -146,9 +147,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             }
                                             if (object1.has("uid")){
                                                 dataBean.setUid(object1.getString("uid"));
+
                                             }
-                                            Log.d("LoginActivity~~~~~~", dataBean.getToken());
-                                            Log.d("LoginActivity!!!!!!", dataBean.getUid());
+
+                                            //利用SP存储这些登录返回数据
+                                            SharedPreferences sp = getSharedPreferences("test",MODE_PRIVATE);
+                                            //向硬盘中存储需要获得editor对象
+                                            SharedPreferences.Editor editor = sp.edit();
+                                            //操作editor对象来存储需要的数据
+                                            //数据已key-value的形式写在文件中
+                                            editor.putBoolean("result",loginBean.getResult().equals("1"));
+                                            editor.putString("token",dataBean.getToken());
+                                            editor.putString("uid",dataBean.getUid());
+                                            //保存所有的editor设置的信息（需要提交后才能保存）
+                                            editor.commit();
+                                            finish();
                                         }
                                     }
                                 }
