@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.R;
+import com.example.dllo.mirror_20.allcategories.AllCategoriesFragment;
 import com.example.dllo.mirror_20.allcategories.MyRvOnClickListener;
 import com.example.dllo.mirror_20.base.BaseFragment;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
@@ -89,6 +90,6 @@ public class ProjectShareFragment extends BaseFragment implements MyRvOnClickLis
     //头布局的点击事件
     @Override
     public void onClick(View v) {
-        Toast.makeText(context, "别点了，还没加效果呢", Toast.LENGTH_SHORT).show();
+        ((AllCategoriesFragment.MenuOnClickListener) getActivity()).menuOnClick();
     }
 }

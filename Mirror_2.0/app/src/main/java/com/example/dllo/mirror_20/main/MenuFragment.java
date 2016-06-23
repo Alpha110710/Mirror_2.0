@@ -1,12 +1,15 @@
-package com.example.dllo.mirror_20;
+package com.example.dllo.mirror_20.main;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
 
 /**
@@ -18,6 +21,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
     private ImageView menuAllBackImg, menuAllCategoriesImg, menuAllGogglesImg, menuAllSunImg, menuAllTopicImg, menuAllBackHomeImg, menuAllBuyCarImg;
     private TextView menuAllBackTv, menuAllCategoriesTv, menuAllGogglesTv, menuAllSunTv, menuAllTopicTv, menuAllBackHomeTv, menuAllBuyCarTv;
     private int pos;
+    private LinearLayout menuAllBackgroundLlayout;
 
 
     @Override
@@ -27,6 +31,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initView(View view) {
+        menuAllBackgroundLlayout = (LinearLayout)view.findViewById(R.id.menu_all_background_llayout);
         menuAllCategoriesLlayout = (LinearLayout) view.findViewById(R.id.menu_all_categories_llayout);
         menuAllGogglesLlayout = (LinearLayout) view.findViewById(R.id.menu_all_goggles_llayout);
         menuAllBackLlayout = (LinearLayout) view.findViewById(R.id.menu_all_back_llayout);
@@ -59,6 +64,23 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         menuAllCategoriesLlayout.setOnClickListener(this);
         menuAllGogglesLlayout.setOnClickListener(this);
         menuAllSunLlayout.setOnClickListener(this);
+        menuAllBackHomeLlayout.setOnClickListener(this);
+        menuAllTopicLlayout.setOnClickListener(this);
+        menuAllBuyCarLlayout.setOnClickListener(this);
+        menuAllBackLlayout.setOnClickListener(this);
+        menuAllBackgroundLlayout.setOnClickListener(this);
+
+        //设置进入动画
+        setAmination();
+
+        //设置进入时 下面线和字体变白
+        setSelected();
+
+
+    }
+
+    //设置字体颜色和白线
+    private void setSelected() {
 
         menuAllCategoriesImg.setVisibility(View.INVISIBLE);
         menuAllSunImg.setVisibility(View.INVISIBLE);
@@ -71,7 +93,6 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         menuAllSunTv.setTextColor(0x88FFFFFF);
         menuAllTopicTv.setTextColor(0x88FFFFFF);
         menuAllBuyCarTv.setTextColor(0x88FFFFFF);
-
 
 
         pos = getArguments().getInt("pos");
@@ -88,7 +109,15 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
                 menuAllSunImg.setVisibility(View.VISIBLE);
                 menuAllSunTv.setTextColor(0xFFFFFFFF);
                 break;
-            //TODO:case3...
+            case 3:
+                menuAllTopicImg.setVisibility(View.VISIBLE);
+                menuAllTopicTv.setTextColor(0xFFFFFFFF);
+                break;
+            case 4:
+                menuAllBuyCarImg.setVisibility(View.VISIBLE);
+                menuAllBuyCarTv.setTextColor(0xFFFFFFFF);
+                break;
+
         }
 
     }
@@ -105,8 +134,36 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
             case R.id.menu_all_sun_llayout:
                 ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(2);
                 break;
+            case R.id.menu_all_topic_llayout:
+                ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(3);
+                break;
+            case R.id.menu_all_buy_car_llayout:
+                ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(4);
+                break;
+            case R.id.menu_all_back_home_llayout:
+                ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(0);
+                break;
+            case R.id.menu_all_back_llayout:
+                ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(0);
+                break;
+
+            //外围最大背景监听
+            case R.id.menu_all_background_llayout:
+                ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(pos);
+                break;
         }
     }
+
+    //设置动画
+    private void setAmination() {
+        AnimationSet localAnimationSet = new AnimationSet(true);
+        ScaleAnimation localScaleAnimation = new ScaleAnimation(
+                1.10000002384185791016F, 1F, 1.10000002384185791016F, 1F, 1, 0.5F, 1, 0.5F);
+        localScaleAnimation.setDuration(250L);
+        localAnimationSet.addAnimation(localScaleAnimation);
+        menuAllBackgroundLlayout.startAnimation(localAnimationSet);
+    }
+
 
     public interface MenuDetailOnClickListener {
         void menuDetailOnClick(int pos);
