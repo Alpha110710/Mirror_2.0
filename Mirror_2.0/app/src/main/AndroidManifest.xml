@@ -26,6 +26,7 @@
             android:launchMode="singleTop"/>
         <activity android:name=".fashion.FashionActivity"/>
 
+
         <meta-data
             android:name="design_width"
             android:value="720" />

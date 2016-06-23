@@ -84,6 +84,12 @@
                 android:textSize="24px" />
 
         </com.zhy.autolayout.AutoRelativeLayout>
+        <ProgressBar
+            android:id="@+id/all_categories_rv_item_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
 
     </com.zhy.autolayout.AutoRelativeLayout>
 

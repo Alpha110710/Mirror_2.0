@@ -9,13 +9,30 @@ import java.util.List;
 /**
  * Created by dllo on 16/6/21.
  */
-public class DataAllBean {
+public class DataAllBean implements Parcelable {
 
 
     private String result;
     private String msg;
 
     private DataBean data;
+
+    protected DataAllBean(Parcel in) {
+        result = in.readString();
+        msg = in.readString();
+    }
+
+    public static final Creator<DataAllBean> CREATOR = new Creator<DataAllBean>() {
+        @Override
+        public DataAllBean createFromParcel(Parcel in) {
+            return new DataAllBean(in);
+        }
+
+        @Override
+        public DataAllBean[] newArray(int size) {
+            return new DataAllBean[size];
+        }
+    };
 
     public String getResult() {
         return result;
@@ -41,7 +58,18 @@ public class DataAllBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(result);
+        dest.writeString(msg);
+    }
+
+    public static class DataBean implements Parcelable{
         /**
          * first_time : 1465989138
          * last_time : 1465956483
@@ -52,6 +80,22 @@ public class DataAllBean {
 
 
         private List<ListBean> list;
+
+        protected DataBean(Parcel in) {
+            list = in.createTypedArrayList(ListBean.CREATOR);
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel in) {
+                return new DataBean(in);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
 
         public PaginationBean getPagination() {
             return pagination;
@@ -69,10 +113,39 @@ public class DataAllBean {
             this.list = list;
         }
 
-        public static class PaginationBean {
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeTypedList(list);
+        }
+
+        public static class PaginationBean implements Parcelable {
             private String first_time;
             private String last_time;
             private String has_more;
+
+            protected PaginationBean(Parcel in) {
+                first_time = in.readString();
+                last_time = in.readString();
+                has_more = in.readString();
+            }
+
+            public static final Creator<PaginationBean> CREATOR = new Creator<PaginationBean>() {
+                @Override
+                public PaginationBean createFromParcel(Parcel in) {
+                    return new PaginationBean(in);
+                }
+
+                @Override
+                public PaginationBean[] newArray(int size) {
+                    return new PaginationBean[size];
+                }
+            };
 
             public String getFirst_time() {
                 return first_time;
@@ -96,6 +169,18 @@ public class DataAllBean {
 
             public void setHas_more(String has_more) {
                 this.has_more = has_more;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(first_time);
+                dest.writeString(last_time);
+                dest.writeString(has_more);
             }
         }
 
@@ -147,7 +232,7 @@ public class DataAllBean {
                 dest.writeString(type);
             }
 
-            public static class DataInfoBean  {
+            public static class DataInfoBean implements Parcelable  {
                 private String goods_id;
                 private String goods_pic;
                 private String model;
@@ -168,6 +253,38 @@ public class DataAllBean {
                 private List<GoodsDataBean> goods_data;
             
                 private List<DesignDesBean> design_des;
+
+                protected DataInfoBean(Parcel in) {
+                    goods_id = in.readString();
+                    goods_pic = in.readString();
+                    model = in.readString();
+                    goods_img = in.readString();
+                    goods_name = in.readString();
+                    last_storge = in.readString();
+                    whole_storge = in.readString();
+                    height = in.readString();
+                    ordain = in.readString();
+                    product_area = in.readString();
+                    goods_price = in.readString();
+                    discount_price = in.readString();
+                    brand = in.readString();
+                    info_des = in.readString();
+                    goods_share = in.readString();
+                    story_title = in.readString();
+                    story_img = in.readString();
+                }
+
+                public static final Creator<DataInfoBean> CREATOR = new Creator<DataInfoBean>() {
+                    @Override
+                    public DataInfoBean createFromParcel(Parcel in) {
+                        return new DataInfoBean(in);
+                    }
+
+                    @Override
+                    public DataInfoBean[] newArray(int size) {
+                        return new DataInfoBean[size];
+                    }
+                };
 
                 public String getStory_title() {
                     return story_title;
@@ -321,6 +438,33 @@ public class DataAllBean {
                     this.design_des = design_des;
                 }
 
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(goods_id);
+                    dest.writeString(goods_pic);
+                    dest.writeString(model);
+                    dest.writeString(goods_img);
+                    dest.writeString(goods_name);
+                    dest.writeString(last_storge);
+                    dest.writeString(whole_storge);
+                    dest.writeString(height);
+                    dest.writeString(ordain);
+                    dest.writeString(product_area);
+                    dest.writeString(goods_price);
+                    dest.writeString(discount_price);
+                    dest.writeString(brand);
+                    dest.writeString(info_des);
+                    dest.writeString(goods_share);
+                    dest.writeString(story_title);
+                    dest.writeString(story_img);
+                }
+
+
                 public static class GoodsDataBean {
                     private String introContent;
                     private String cellHeight;
@@ -328,6 +472,27 @@ public class DataAllBean {
                     private String location;
                     private String country;
                     private String english;
+
+                    protected GoodsDataBean(Parcel in) {
+                        introContent = in.readString();
+                        cellHeight = in.readString();
+                        name = in.readString();
+                        location = in.readString();
+                        country = in.readString();
+                        english = in.readString();
+                    }
+
+                    public static final Creator<GoodsDataBean> CREATOR = new Creator<GoodsDataBean>() {
+                        @Override
+                        public GoodsDataBean createFromParcel(Parcel in) {
+                            return new GoodsDataBean(in);
+                        }
+
+                        @Override
+                        public GoodsDataBean[] newArray(int size) {
+                            return new GoodsDataBean[size];
+                        }
+                    };
 
                     public String getIntroContent() {
                         return introContent;
@@ -376,12 +541,32 @@ public class DataAllBean {
                     public void setEnglish(String english) {
                         this.english = english;
                     }
+
+                    }
                 }
 
-                public static class DesignDesBean {
+                public static class DesignDesBean implements Parcelable{
                     private String img;
                     private String cellHeight;
                     private String type;
+
+                    protected DesignDesBean(Parcel in) {
+                        img = in.readString();
+                        cellHeight = in.readString();
+                        type = in.readString();
+                    }
+
+                    public static final Creator<DesignDesBean> CREATOR = new Creator<DesignDesBean>() {
+                        @Override
+                        public DesignDesBean createFromParcel(Parcel in) {
+                            return new DesignDesBean(in);
+                        }
+
+                        @Override
+                        public DesignDesBean[] newArray(int size) {
+                            return new DesignDesBean[size];
+                        }
+                    };
 
                     public String getImg() {
                         return img;
@@ -406,8 +591,19 @@ public class DataAllBean {
                     public void setType(String type) {
                         this.type = type;
                     }
+
+                    @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(Parcel dest, int flags) {
+                        dest.writeString(img);
+                        dest.writeString(cellHeight);
+                        dest.writeString(type);
+                    }
                 }
             }
         }
     }
-}

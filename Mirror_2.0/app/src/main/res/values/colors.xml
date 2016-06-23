@@ -6,6 +6,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="light_grey">#f1f1f1</color>
     <color name="transport">#00000000</color>
-    <color name="translucent">#77000000</color>
+    <color name="translucent">#33000000</color>
+    <color name="translucent_light">#88FFFFFF</color>
     <color name="colorBlack">#000000</color>
 </resources>

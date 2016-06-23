@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/menu_all_categories_llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_all_categories_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:text="全部分类"
+            android:textColor="@color/translucent_light"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/menu_all_categories_img"
+            android:layout_width="85dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="50dp"
+            android:background="@mipmap/lineundertitle"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_all_goggles_llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_all_goggles_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:text="浏览平光镜"
+            android:textColor="@color/translucent_light"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/menu_all_goggles_img"
+            android:layout_width="105dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="50dp"
+            android:background="@mipmap/lineundertitle"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_all_sun_llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_all_sun_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:text="浏览太阳镜"
+            android:textColor="@color/translucent_light"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/menu_all_sun_img"
+            android:layout_width="105dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="50dp"
+            android:background="@mipmap/lineundertitle"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_all_topic_llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_all_topic_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:text="专题分享"
+            android:textColor="@color/translucent_light"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/menu_all_topic_img"
+            android:layout_width="85dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="50dp"
+            android:background="@mipmap/lineundertitle"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_all_buy_car_llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_all_buy_car_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:text="我的购物车"
+            android:textColor="@color/translucent_light"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/menu_all_buy_car_img"
+            android:layout_width="105dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="50dp"
+            android:background="@mipmap/lineundertitle"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_all_back_home_llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_all_back_home_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:text="返回首页"
+            android:textColor="@color/translucent_light"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/menu_all_back_home_img"
+            android:layout_width="85dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="50dp"
+            android:background="@mipmap/lineundertitle"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_all_back_llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_all_back_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:text="退出"
+            android:textColor="@color/translucent_light"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/menu_all_back_img"
+            android:layout_width="85dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="50dp"
+            android:background="@mipmap/lineundertitle"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+</LinearLayout>
