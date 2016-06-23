@@ -1,19 +1,19 @@
 package com.example.dllo.mirror_20.fashion;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.example.dllo.mirror_20.Bean.BBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
+import com.example.dllo.mirror_20.projectshare.ProjectShareBean;
 import com.example.dllo.mirror_20.view.VerticalViewPager;
 import com.google.gson.Gson;
 
@@ -32,18 +32,22 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
     private String url = "http://api.mirroreye.cn/index.php/story/story_list";
     private HashMap<String, String> map;
     private FashionAdapter fashionAdapter;
-    private BBean bBean;
+    private ProjectShareBean bBean;
+    private int pos;
     private NetworkListener networkListener = new NetworkListener() {
         @Override
         public void onSuccessed(String result) {
             Gson gson = new Gson();
-            bBean = gson.fromJson(result, BBean.class);
+            bBean = gson.fromJson(result, ProjectShareBean.class);
 
-            for (int i = 0; i < bBean.getData().getList().get(0).getStory_data().getText_array().size(); i++) {
+            Intent intent=getIntent();
+
+            pos=intent.getIntExtra("position",0);
+            for (int i = 0; i < bBean.getData().getList().get(pos).getStory_data().getText_array().size(); i++) {
                 fragments.add(FashionFragment.createFragment(
-                        bBean.getData().getList().get(0).getStory_data().getText_array().get(i)));
+                        bBean.getData().getList().get(pos).getStory_data().getText_array().get(i)));
 
-                networkTools.getNetworkImage(bBean.getData().getList().get(0)
+                networkTools.getNetworkImage(bBean.getData().getList().get(pos)
                                 .getStory_data().getImg_array().get(0),
                         fashionBackgroundImg);
 
@@ -67,7 +71,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
         @Override
         public void onPageSelected(int position) {
 
-            networkTools.getNetworkImage(bBean.getData().getList().get(0)
+            networkTools.getNetworkImage(bBean.getData().getList().get(pos)
                             .getStory_data().getImg_array().get(position),
                     fashionBackgroundImg);
         }
@@ -134,11 +138,10 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fashion_close:
-                Toast.makeText(this, "~~~~~~~aaa", Toast.LENGTH_SHORT).show();
-//                finish();
+           finish();
                 break;
             case R.id.fashion_share:
-                Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "没写呢,点我干啥", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

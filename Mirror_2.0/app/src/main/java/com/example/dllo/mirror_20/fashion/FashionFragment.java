@@ -5,11 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.dllo.mirror_20.Bean.BBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
-
-import java.util.List;
+import com.example.dllo.mirror_20.projectshare.ProjectShareBean;
 
 /**
  * Created by dllo on 16/6/23.
@@ -18,7 +16,7 @@ public class FashionFragment extends BaseFragment {
     private TextView smallTitle,title,subTitle;
 
 
-    public static Fragment createFragment(BBean.DataBean.ListBean.StoryDataBean.TextArrayBean textArrayBeen){
+    public static Fragment createFragment(ProjectShareBean.DataBean.ListBean.StoryDataBean.TextArrayBean textArrayBeen){
         Fragment newFragment=new FashionFragment();
         Bundle bundle=new Bundle();
         bundle.putString("smallTitle", textArrayBeen.getSmallTitle());

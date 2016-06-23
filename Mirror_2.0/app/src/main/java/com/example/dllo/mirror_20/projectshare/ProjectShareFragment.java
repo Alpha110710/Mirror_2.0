@@ -1,5 +1,6 @@
 package com.example.dllo.mirror_20.projectshare;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.allcategories.AllCategoriesFragment;
 import com.example.dllo.mirror_20.allcategories.MyRvOnClickListener;
 import com.example.dllo.mirror_20.base.BaseFragment;
+import com.example.dllo.mirror_20.fashion.FashionActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.google.gson.Gson;
@@ -83,7 +85,10 @@ public class ProjectShareFragment extends BaseFragment implements MyRvOnClickLis
     //RecyclerView的点击事件
     @Override
     public void onClick(int position) {
-        Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(context, FashionActivity.class);
+        intent.putExtra("position",position);
+        startActivity(intent);
+       // Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
 
     }
 
