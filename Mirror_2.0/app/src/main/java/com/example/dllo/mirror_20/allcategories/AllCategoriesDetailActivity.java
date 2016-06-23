@@ -109,15 +109,15 @@ public class AllCategoriesDetailActivity extends BaseActivity {
 
                 switch (scrollState) {
                     //静止时
-                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE :
+                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                         scrollFlg = false;
                         break;
                     //触摸时
-                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL :
+                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
                         scrollFlg = true;
                         break;
                     //放开时
-                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING :
+                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
                         scrollFlg = true;
                         break;
                 }
@@ -126,14 +126,14 @@ public class AllCategoriesDetailActivity extends BaseActivity {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                        allCategoriesDetailOutListView.smoothScrollToPosition(firstVisibleItem);
-                if (scrollFlg = true){
+                allCategoriesDetailOutListView.smoothScrollToPosition(firstVisibleItem);
+                if (scrollFlg = true) {
                     //向上滑动
-                    if (firstVisibleItem > lastPos){
+                    if (firstVisibleItem > lastPos) {
 //                        allCategoriesDetailOutListView.setSelectionFromTop(0, 200);
                     }
                     //向下滑动
-                    if (firstVisibleItem < lastPos){
+                    if (firstVisibleItem < lastPos) {
 
                     }
                     lastPos = firstVisibleItem;
@@ -188,7 +188,7 @@ public class AllCategoriesDetailActivity extends BaseActivity {
     }
 
 
-    class MyOnGestureListener implements GestureDetector.OnGestureListener{
+    class MyOnGestureListener implements GestureDetector.OnGestureListener {
 
         @Override
         public boolean onDown(MotionEvent e) {

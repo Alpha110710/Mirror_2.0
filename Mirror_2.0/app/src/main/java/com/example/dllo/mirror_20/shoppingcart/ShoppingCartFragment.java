@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.dllo.mirror_20.R;
+import com.example.dllo.mirror_20.allcategories.AllCategoriesFragment;
 import com.example.dllo.mirror_20.base.BaseFragment;
 import com.zhy.autolayout.AutoRelativeLayout;
 
@@ -33,6 +34,6 @@ public class ShoppingCartFragment extends BaseFragment implements View.OnClickLi
     //头布局的点击事件
     @Override
     public void onClick(View v) {
-        Toast.makeText(context, "别点了，还没加效果呢", Toast.LENGTH_SHORT).show();
+        ((AllCategoriesFragment.MenuOnClickListener) getActivity()).menuOnClick();
     }
 }
