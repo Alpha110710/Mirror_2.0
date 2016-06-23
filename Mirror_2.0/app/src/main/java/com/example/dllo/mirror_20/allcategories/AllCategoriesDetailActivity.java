@@ -21,6 +21,7 @@ import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
+import com.example.dllo.mirror_20.view.NoScrollListview;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -65,20 +66,22 @@ public class AllCategoriesDetailActivity extends BaseActivity {
     };
 
     private ImageView allCategoriesDetailBackImg;
-    private ListView allCategoriesDetailOutListView, allCategoriesDetailInListView;
+    private ListView allCategoriesDetailInListView;
+    private NoScrollListview allCategoriesDetailOutListView;
     private DetailActivityOutListViewAdapter detailActivityOutListViewAdapter;
     private DetailActivityInListViewAdapter detailActivityInListViewAdapter;
     private RelativeLayout relativeheaderTranslucentBackRlayoutLayout;
     private AccelerateDecelerateInterpolator mSmoothInterpolator;
     private GestureDetector gestureDetector;
     private MyOnGestureListener myOnGestureListener;
+    private int height;
 
     @Override
     public void initActivity() {
         setContentView(R.layout.activity_all_categories_detail);
 
         allCategoriesDetailBackImg = (ImageView) findViewById(R.id.all_categories_detail_back_img);
-        allCategoriesDetailOutListView = (ListView) findViewById(R.id.all_categories_detail_out_list_view);
+        allCategoriesDetailOutListView = (NoScrollListview) findViewById(R.id.all_categories_detail_out_list_view);
         allCategoriesDetailInListView = (ListView) findViewById(R.id.all_categories_detail_in_list_view);
 
 
@@ -87,6 +90,7 @@ public class AllCategoriesDetailActivity extends BaseActivity {
         allCategoriesDetailOutListView.setAdapter(detailActivityOutListViewAdapter);
         allCategoriesDetailInListView.setAdapter(detailActivityInListViewAdapter);
 
+        //头布局
         View view = LayoutInflater.from(this).inflate(R.layout.listview_header_translucent, null);
         relativeheaderTranslucentBackRlayoutLayout = (RelativeLayout) view.findViewById(R.id.header_translucent_back_rlayout);
 
@@ -94,6 +98,7 @@ public class AllCategoriesDetailActivity extends BaseActivity {
 
         allCategoriesDetailOutListView.addHeaderView(viewOut);
         allCategoriesDetailInListView.addHeaderView(view);
+        height = view.getHeight();
 
         //接收上一个fragment传入的position
         Intent intent = getIntent();
@@ -107,42 +112,42 @@ public class AllCategoriesDetailActivity extends BaseActivity {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-                switch (scrollState) {
-                    //静止时
-                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                        scrollFlg = false;
-                        break;
-                    //触摸时
-                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-                        scrollFlg = true;
-                        break;
-                    //放开时
-                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
-                        scrollFlg = true;
-                        break;
-                }
+
+//                allCategoriesDetailOutListView.s
+
+//                Log.d("AllCategoriesDetailActi", "scrolly:" + scrolly);
+//                switch (scrollState) {
+//                    //静止时
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+//                        scrollFlg = false;
+//                        break;
+//                    //触摸时
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+//                        scrollFlg = true;
+//                        break;
+//                    //放开时
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
+//                        scrollFlg = true;
+//                        break;
+//                }
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                allCategoriesDetailOutListView.smoothScrollToPosition(firstVisibleItem);
-                if (scrollFlg = true) {
-                    //向上滑动
-                    if (firstVisibleItem > lastPos) {
-//                        allCategoriesDetailOutListView.setSelectionFromTop(0, 200);
-                    }
-                    //向下滑动
-                    if (firstVisibleItem < lastPos) {
-
-                    }
-                    lastPos = firstVisibleItem;
+                View view1 = allCategoriesDetailInListView.getChildAt(0);
+                if (view1 == null) {
+                    return;
                 }
-////                    allCategoriesDetailInListView.setSelection();
-//                    allCategoriesDetailOutListView.setFriction(ViewConfiguration.getScrollFriction());
+                Log.d("AllCategoriesDetailA~~~~~~cti", "height:" + height);
+                scrolly = -view1.getTop() + allCategoriesDetailInListView.getPaddingTop() - height +
+                        allCategoriesDetailInListView.getFirstVisiblePosition() * view1.getHeight();
 
+                Log.d("AllCategoriesDetailActi", "scrolly:" + scrolly);
+                allCategoriesDetailOutListView.setSelectionFromTop(0, -(int) (scrolly * 1.3));
 
-//                }
+//                allCategoriesDetailOutListView.smoothScrollToPosition(firstVisibleItem);
+
             }
         });
 
@@ -160,9 +165,8 @@ public class AllCategoriesDetailActivity extends BaseActivity {
         gestureDetector = new GestureDetector(myOnGestureListener);
     }
 
-    int lastPos = 0;
-    boolean scrollFlg = false;
 
+    int scrolly;
 
     /**
      * 获取滚动的高度，用于检测是否需要滚动
