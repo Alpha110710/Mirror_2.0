@@ -29,13 +29,14 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
         mainVerticalViewpager = (VerticalViewPager) findViewById(R.id.main_vertical_viewpager);
         mainFrameLayout = (FrameLayout) findViewById(R.id.main_frame_layout);
 
-        menuFragment = new MenuFragment();
+
 
         mainVerticalViewpager.internalCanScrollVertically(View.FOCUS_LEFT);
         mainVerticalViewPagerAdapter = new MainVerticalViewPagerAdapter(getSupportFragmentManager());
         fragments = new ArrayList<>();
         fragments.add(new AllCategoriesFragment());
-        fragments.add(new SecondFragment());
+        fragments.add(new AllCategoriesFragment());
+        fragments.add(new AllCategoriesFragment());
         mainVerticalViewPagerAdapter.setFragments(fragments);
 
         mainVerticalViewpager.setAdapter(mainVerticalViewPagerAdapter);
@@ -44,9 +45,12 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
     }
 
 
+    //实现对应每个viewPager item的左上角点击监听
     @Override
     public void menuOnClick() {
+        menuFragment = new MenuFragment();
 
+        //替换为menufragment 并将viewpager的当前页position传入
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, menuFragment).commit();
         mainVerticalViewpager.setVisibility(View.GONE);
         int pos = mainVerticalViewpager.getCurrentItem();
@@ -56,14 +60,15 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
 
     }
 
+
+    //实现分类界面的按钮监听
     @Override
     public void menuDetailOnClick(int pos) {
         mainVerticalViewpager.setVisibility(View.VISIBLE);
-        switch (pos) {
-            case 0:
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, new AllCategoriesFragment())
-                        .commit();
-                break;
-        }
+        getSupportFragmentManager().beginTransaction().hide(menuFragment).commit();
+
+        mainVerticalViewpager.setCurrentItem(pos);
+
+
     }
 }

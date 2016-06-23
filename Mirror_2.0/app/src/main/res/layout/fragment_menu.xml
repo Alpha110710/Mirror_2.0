@@ -18,7 +18,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:text="全部分类"
-            android:textColor="@color/translucent"
+            android:textColor="@color/translucent_light"
             android:textSize="20sp" />
 
         <ImageView
@@ -35,7 +35,7 @@
         android:id="@+id/menu_all_goggles_llayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:text="浏览平光镜"
-            android:textColor="@color/translucent"
+            android:textColor="@color/translucent_light"
             android:textSize="20sp" />
 
         <ImageView
@@ -61,7 +61,7 @@
         android:id="@+id/menu_all_sun_llayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -70,7 +70,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:text="浏览太阳镜"
-            android:textColor="@color/translucent"
+            android:textColor="@color/translucent_light"
             android:textSize="20sp" />
 
         <ImageView
@@ -87,7 +87,7 @@
         android:id="@+id/menu_all_topic_llayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -96,7 +96,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:text="专题分享"
-            android:textColor="@color/translucent"
+            android:textColor="@color/translucent_light"
             android:textSize="20sp" />
 
         <ImageView
@@ -113,7 +113,7 @@
         android:id="@+id/menu_all_buy_car_llayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -122,7 +122,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:text="我的购物车"
-            android:textColor="@color/translucent"
+            android:textColor="@color/translucent_light"
             android:textSize="20sp" />
 
         <ImageView
@@ -139,7 +139,7 @@
         android:id="@+id/menu_all_back_home_llayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -148,7 +148,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:text="返回首页"
-            android:textColor="@color/translucent"
+            android:textColor="@color/translucent_light"
             android:textSize="20sp" />
 
         <ImageView
@@ -165,7 +165,7 @@
         android:id="@+id/menu_all_back_llayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -174,7 +174,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:text="退出"
-            android:textColor="@color/translucent"
+            android:textColor="@color/translucent_light"
             android:textSize="20sp" />
 
         <ImageView

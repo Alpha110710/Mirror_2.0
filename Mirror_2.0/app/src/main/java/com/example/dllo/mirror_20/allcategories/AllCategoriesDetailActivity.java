@@ -1,5 +1,7 @@
 package com.example.dllo.mirror_20.allcategories;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -35,23 +37,24 @@ public class AllCategoriesDetailActivity extends BaseActivity {
     private NetworkTools networkTools = new NetworkTools();
     private Gson gson;
     private DataAllBean dataAllBean;
+    private int position;
     private NetworkListener networkListener = new NetworkListener() {
         @Override
         public void onSuccessed(String result) {
             gson = new Gson();
             dataAllBean = gson.fromJson(result, DataAllBean.class);
 
-            if (dataAllBean.getData().getList().get(0).getType().equals("1")) {
+            if (dataAllBean.getData().getList().get(position).getType().equals("1")) {
                 //解析背景图片
-                Picasso.with(AllCategoriesDetailActivity.this).load(dataAllBean.getData().getList().get(0).getData_info().getGoods_img())
+                Picasso.with(AllCategoriesDetailActivity.this).load(dataAllBean.getData().getList().get(position).getData_info().getGoods_img())
                         .fit().into(allCategoriesDetailBackImg);
             }
             //给外面listview适配器设置数据
-            List<DataAllBean.DataBean.ListBean.DataInfoBean.GoodsDataBean> goodsDataBeans = dataAllBean.getData().getList().get(0).getData_info().getGoods_data();
+            List<DataAllBean.DataBean.ListBean.DataInfoBean.GoodsDataBean> goodsDataBeans = dataAllBean.getData().getList().get(position).getData_info().getGoods_data();
             detailActivityOutListViewAdapter.setGoodsDataBeans(goodsDataBeans);
 
             //给里面listview适配器设置数据
-            List<DataAllBean.DataBean.ListBean.DataInfoBean.DesignDesBean> designDesBeans = dataAllBean.getData().getList().get(0).getData_info().getDesign_des();
+            List<DataAllBean.DataBean.ListBean.DataInfoBean.DesignDesBean> designDesBeans = dataAllBean.getData().getList().get(position).getData_info().getDesign_des();
             detailActivityInListViewAdapter.setDesignDesBeans(designDesBeans);
         }
 
@@ -92,12 +95,14 @@ public class AllCategoriesDetailActivity extends BaseActivity {
         allCategoriesDetailOutListView.addHeaderView(viewOut);
         allCategoriesDetailInListView.addHeaderView(view);
 
-
-
+        //接收上一个fragment传入的position
+        Intent intent = getIntent();
+        position = intent.getIntExtra("position", 0);
 
 
         networkTools.getNetworkData(url, networkListener);
 
+        //TODO
         allCategoriesDetailInListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -121,11 +126,11 @@ public class AllCategoriesDetailActivity extends BaseActivity {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
+                        allCategoriesDetailOutListView.smoothScrollToPosition(firstVisibleItem);
                 if (scrollFlg = true){
                     //向上滑动
                     if (firstVisibleItem > lastPos){
 //                        allCategoriesDetailOutListView.setSelectionFromTop(0, 200);
-//                        allCategoriesDetailOutListView.smoothScrollToPosition(firstVisibleItem);
                     }
                     //向下滑动
                     if (firstVisibleItem < lastPos){

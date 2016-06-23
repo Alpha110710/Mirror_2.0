@@ -85,9 +85,10 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
     public void onClick(int position) {
         Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context, AllCategoriesDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("newBean", bean.getData().getList().get(position));
-        intent.putExtras(bundle);
+        intent.putExtra("position", position);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable("newBean", bean.getData().getList().get(position));
+//        intent.putExtras(bundle);
         startActivity(intent);
     }
 

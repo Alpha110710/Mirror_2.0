@@ -23,6 +23,7 @@
         <activity android:name=".allcategories.AllCategoriesDetailActivity" />
         <activity android:name=".main.MainActivity" />
 
+
         <meta-data
             android:name="design_width"
             android:value="720" />
