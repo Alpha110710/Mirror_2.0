@@ -85,12 +85,9 @@ public class FlatLightFragment extends BaseFragment implements MyRvOnClickListen
     //RecyclerView的点击事件
     @Override
     public void onClick(int position) {
-        Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(context,AllCategoriesDetailActivity.class);
-//        Bundle bundle = new Bundle();
-//        DataAllBean.DataBean.ListBean.DataInfoBean newBean =  bean.getData().getList().get(position).getData_info();
-//        bundle.putParcelable("newBean", newBean);
-//        intent.putExtras(bundle);
+        intent.putExtra("position", position);
         startActivity(intent);
     }
 

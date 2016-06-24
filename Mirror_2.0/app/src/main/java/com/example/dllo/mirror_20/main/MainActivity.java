@@ -10,7 +10,9 @@ import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.dllo.mirror_20.Bean.EventBusBean;
 import com.example.dllo.mirror_20.R;
 
 import com.example.dllo.mirror_20.allcategories.AllCategoriesFragment;
@@ -20,6 +22,9 @@ import com.example.dllo.mirror_20.projectshare.ProjectShareFragment;
 import com.example.dllo.mirror_20.shoppingcart.ShoppingCartFragment;
 import com.example.dllo.mirror_20.sunglasses.SunglassesFragment;
 import com.example.dllo.mirror_20.view.VerticalViewPager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -31,11 +36,16 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
     private MenuFragment menuFragment;
     private ImageView mainMirrorImg;
     private TextView mainLoginTv;
+    private long mTime;//用来记录用户第一次点击返回键时的时间
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //注册EventBus
+        EventBus.getDefault().register(this);
+
         mainVerticalViewpager = (VerticalViewPager) findViewById(R.id.main_vertical_viewpager);
         mainFrameLayout = (FrameLayout) findViewById(R.id.main_frame_layout);
         mainMirrorImg = (ImageView) findViewById(R.id.main_mirror_img);
@@ -62,14 +72,18 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.main_mirror_img:
                 //加动画
                 showScaleAnim(mainMirrorImg);
                 break;
             case R.id.main_login_tv:
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                if (mainLoginTv.getText().toString().equals("登录")) {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    mainVerticalViewpager.setCurrentItem(4);
+                }
                 break;
         }
     }
@@ -91,12 +105,12 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
     }
 
     //设置mirror动画
-    public void showScaleAnim(ImageView imageView){
+    public void showScaleAnim(ImageView imageView) {
         //前两个参数是x轴从多少道多少
         //3、4参数是y轴从多少道多少
-        ScaleAnimation scaleAnimation = new ScaleAnimation(1f,1.1f,1f,1.1f,
-                Animation.RELATIVE_TO_SELF,0.5f,
-                Animation.RELATIVE_TO_SELF,0.5f);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1f, 1.1f, 1f, 1.1f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setRepeatCount(1);//1为动两次
         scaleAnimation.setDuration(300);
         imageView.startAnimation(scaleAnimation);
@@ -112,5 +126,27 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
 
     }
 
+    @Subscribe
+    public void setBuyCar(EventBusBean eventBusBean) {
+        String text = eventBusBean.text;
+        mainLoginTv.setText(text);
+    }
 
+    @Override
+    public void onBackPressed() {
+
+        if (System.currentTimeMillis() - mTime > 2000) {
+            mTime = System.currentTimeMillis();//System.currentTimeMillis()是用来获取当前时间
+            Toast.makeText(this, "小主，两秒内连点两下小的就挂啦", Toast.LENGTH_SHORT).show();
+        } else {
+            System.exit(0);
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }
