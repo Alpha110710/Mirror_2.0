@@ -6,5 +6,5 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="350px"/>
+        android:layout_height="3000px"/>
 </com.zhy.autolayout.AutoLinearLayout>

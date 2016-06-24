@@ -9,11 +9,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
@@ -32,7 +37,7 @@ import java.util.List;
 /**
  * Created by dllo on 16/6/21.
  */
-public class AllCategoriesDetailActivity extends BaseActivity {
+public class AllCategoriesDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private String url = "http://lizhongren.com.cn/mengke/jsonhandle.php";
     private NetworkTools networkTools = new NetworkTools();
@@ -65,24 +70,28 @@ public class AllCategoriesDetailActivity extends BaseActivity {
         }
     };
 
-    private ImageView allCategoriesDetailBackImg;
+    private ImageView allCategoriesDetailBackImg, allCategoriesDetailRlayoutBackImg;
     private ListView allCategoriesDetailInListView;
-    private NoScrollListview allCategoriesDetailOutListView;
+    private ListView allCategoriesDetailOutListView;
     private DetailActivityOutListViewAdapter detailActivityOutListViewAdapter;
     private DetailActivityInListViewAdapter detailActivityInListViewAdapter;
-    private RelativeLayout relativeheaderTranslucentBackRlayoutLayout;
+    private RelativeLayout relativeheaderTranslucentBackRlayoutLayout, allCategoriesDetailRlayout;
     private AccelerateDecelerateInterpolator mSmoothInterpolator;
-    private GestureDetector gestureDetector;
-    private MyOnGestureListener myOnGestureListener;
-    private int height;
+    private int pos = -1;
+    private boolean flag = true;
+    private TextView allCategoriesDetailRlayoutPictureTv, allCategoriesDetailRlayoutBuyTv;
 
     @Override
     public void initActivity() {
         setContentView(R.layout.activity_all_categories_detail);
 
         allCategoriesDetailBackImg = (ImageView) findViewById(R.id.all_categories_detail_back_img);
-        allCategoriesDetailOutListView = (NoScrollListview) findViewById(R.id.all_categories_detail_out_list_view);
+        allCategoriesDetailOutListView = (ListView) findViewById(R.id.all_categories_detail_out_list_view);
         allCategoriesDetailInListView = (ListView) findViewById(R.id.all_categories_detail_in_list_view);
+        allCategoriesDetailRlayout = (RelativeLayout) findViewById(R.id.all_categories_detail_rlayout);
+        allCategoriesDetailRlayoutBackImg = (ImageView)findViewById(R.id.all_categories_detail_rlayout_back_img);
+        allCategoriesDetailRlayoutPictureTv = (TextView)findViewById(R.id.all_categories_detail_rlayout_picture_tv);
+        allCategoriesDetailRlayoutBuyTv = (TextView)findViewById(R.id.all_categories_detail_rlayout_buy_tv);
 
 
         detailActivityOutListViewAdapter = new DetailActivityOutListViewAdapter(this);
@@ -90,64 +99,63 @@ public class AllCategoriesDetailActivity extends BaseActivity {
         allCategoriesDetailOutListView.setAdapter(detailActivityOutListViewAdapter);
         allCategoriesDetailInListView.setAdapter(detailActivityInListViewAdapter);
 
+
+        allCategoriesDetailRlayoutBackImg.setOnClickListener(this);
+        allCategoriesDetailRlayoutPictureTv.setOnClickListener(this);
+
         //头布局
         View view = LayoutInflater.from(this).inflate(R.layout.listview_header_translucent, null);
         relativeheaderTranslucentBackRlayoutLayout = (RelativeLayout) view.findViewById(R.id.header_translucent_back_rlayout);
 
-        View viewOut = LayoutInflater.from(this).inflate(R.layout.listview_header_transparent, null);
+        final View viewOut = LayoutInflater.from(this).inflate(R.layout.listview_header_transparent, null);
+        View viewFlow = LayoutInflater.from(this).inflate(R.layout.listview_out_flow, null);
 
+        //加头加尾
         allCategoriesDetailOutListView.addHeaderView(viewOut);
+        allCategoriesDetailOutListView.addFooterView(viewFlow);
         allCategoriesDetailInListView.addHeaderView(view);
-        height = view.getHeight();
 
         //接收上一个fragment传入的position
         Intent intent = getIntent();
         position = intent.getIntExtra("position", 0);
 
-
+        //开始解析
         networkTools.getNetworkData(url, networkListener);
 
-        //TODO
+        //里层listview滑动监听
         allCategoriesDetailInListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-
-//                allCategoriesDetailOutListView.s
-
-//                Log.d("AllCategoriesDetailActi", "scrolly:" + scrolly);
-//                switch (scrollState) {
-//                    //静止时
-//                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-//                        scrollFlg = false;
-//                        break;
-//                    //触摸时
-//                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-//                        scrollFlg = true;
-//                        break;
-//                    //放开时
-//                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
-//                        scrollFlg = true;
-//                        break;
-//                }
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-                View view1 = allCategoriesDetailInListView.getChildAt(0);
+                //参考view为里面listview的第一个item
+                View view1 = allCategoriesDetailInListView.getChildAt(1);
                 if (view1 == null) {
                     return;
                 }
-                Log.d("AllCategoriesDetailA~~~~~~cti", "height:" + height);
-                scrolly = -view1.getTop() + allCategoriesDetailInListView.getPaddingTop() - height +
+                //算法计算相对距离
+                int scrolly = -view1.getTop() + allCategoriesDetailInListView.getPaddingTop() +
                         allCategoriesDetailInListView.getFirstVisiblePosition() * view1.getHeight();
+                //设置外层listview的滑动距离
+                allCategoriesDetailOutListView.setSelectionFromTop(1, -(int) (scrolly * 1.2));
 
-                Log.d("AllCategoriesDetailActi", "scrolly:" + scrolly);
-                allCategoriesDetailOutListView.setSelectionFromTop(0, -(int) (scrolly * 1.3));
+                //增加的过滤判断
+                if (firstVisibleItem != pos) {
+                    pos = firstVisibleItem;
+                    //判断设置最下面的相对布局 可见不可见
+                    if (firstVisibleItem == 1 && flag) {
+                        allCategoriesDetailRlayout.setVisibility(View.VISIBLE);
+                        setAmination();
+                        flag = false;
+                    } else if (firstVisibleItem == 0 && !flag) {
+                        setDismissAmination();
+                        flag = true;
+                    }
 
-//                allCategoriesDetailOutListView.smoothScrollToPosition(firstVisibleItem);
-
+                }
             }
         });
 
@@ -161,67 +169,61 @@ public class AllCategoriesDetailActivity extends BaseActivity {
             }
         });
 
-        myOnGestureListener = new MyOnGestureListener();
-        gestureDetector = new GestureDetector(myOnGestureListener);
+
     }
 
 
-    int scrolly;
+    //设置动画
+    private void setAmination() {
+        //平移动画
+        TranslateAnimation translateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1,
+                Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_PARENT, 0);
+        translateAnimation.setDuration(250);
+        translateAnimation.setRepeatCount(0);
+        allCategoriesDetailRlayout.startAnimation(translateAnimation);
 
-    /**
-     * 获取滚动的高度，用于检测是否需要滚动
-     */
-    private int getScrollY() {
-        int scrollY = 0;
-        int itemScrollY = 0;
-        int itemNum = allCategoriesDetailOutListView.getFirstVisiblePosition();
-        View firstVisible = allCategoriesDetailOutListView.getChildAt(0);
-        if (firstVisible == null) {
-            return scrollY;
-        }
-        if (itemNum >= 1) {
-            itemScrollY = relativeheaderTranslucentBackRlayoutLayout.getMeasuredHeight();
-        }
-        scrollY = itemScrollY - firstVisible.getTop();
-        return scrollY;
     }
 
-    //求大小
-    public static float clamp(float value, float min, float max) {
-        return Math.max(Math.min(value, max), min);
+    //设置消失动画
+    private void setDismissAmination() {
+
+        TranslateAnimation translateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0,
+                Animation.RELATIVE_TO_PARENT, -1, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_PARENT, 0);
+        translateAnimation.setDuration(250);
+        translateAnimation.setRepeatCount(0);
+        allCategoriesDetailRlayout.startAnimation(translateAnimation);
+        translateAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                //对动画进行监听,设置消失
+                allCategoriesDetailRlayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.all_categories_detail_rlayout_back_img:
+                finish();
+                break;
+            case R.id.all_categories_detail_rlayout_picture_tv:
+                //Todo: 调转播放界面
+                break;
+            case R.id.all_categories_detail_rlayout_buy_tv:
+                //todo:判断登录,进入购买
 
-    class MyOnGestureListener implements GestureDetector.OnGestureListener {
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return false;
-        }
-
-        @Override
-        public void onShowPress(MotionEvent e) {
-
-        }
-
-        @Override
-        public boolean onSingleTapUp(MotionEvent e) {
-            return false;
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            return false;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent e) {
-
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            return false;
+                break;
         }
     }
 }

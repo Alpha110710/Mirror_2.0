@@ -17,21 +17,53 @@
         android:layout_height="match_parent"
         android:divider="@null" />
 
-    <com.example.dllo.mirror_20.view.NoScrollListview
+    <ListView
         android:id="@+id/all_categories_detail_out_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/transport"
         android:divider="@null" />
+
     <RelativeLayout
+        android:id="@+id/all_categories_detail_rlayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
+
         <ImageView
+            android:id="@+id/all_categories_detail_rlayout_back_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/back"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:id="@+id/all_categories_detail_rlayout_picture_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="110dp"
+            android:background="@mipmap/wearblackbutton"
+            android:paddingLeft="12dp"
+            android:paddingTop="13dp"
+            android:text="佩戴图集"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/all_categories_detail_rlayout_buy_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/buybutton"
+            android:paddingLeft="40dp"
+            android:paddingTop="12dp"
+            android:text="购买"
+            android:textSize="20sp" />
+
     </RelativeLayout>
+
 </com.zhy.autolayout.AutoRelativeLayout>
