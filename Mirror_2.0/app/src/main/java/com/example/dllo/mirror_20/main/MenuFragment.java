@@ -1,6 +1,10 @@
 package com.example.dllo.mirror_20.main;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationSet;
@@ -8,9 +12,13 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.dllo.mirror_20.Bean.EventBusBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by dllo on 16/6/22.
@@ -22,6 +30,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
     private TextView menuAllBackTv, menuAllCategoriesTv, menuAllGogglesTv, menuAllSunTv, menuAllTopicTv, menuAllBackHomeTv, menuAllBuyCarTv;
     private int pos;
     private LinearLayout menuAllBackgroundLlayout;
+    private EventBus eventBus;
 
 
     @Override
@@ -61,6 +70,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initData() {
+        eventBus=EventBus.getDefault();
         menuAllCategoriesLlayout.setOnClickListener(this);
         menuAllGogglesLlayout.setOnClickListener(this);
         menuAllSunLlayout.setOnClickListener(this);
@@ -118,6 +128,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
                 menuAllBuyCarTv.setTextColor(0xFFFFFFFF);
                 break;
 
+
         }
 
     }
@@ -144,7 +155,16 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
                 ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(0);
                 break;
             case R.id.menu_all_back_llayout:
-                ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(0);
+                //要想取出数据的话，同样需要操作SharedPreference的对象
+                SharedPreferences getSp = context.getSharedPreferences("test", Context.MODE_PRIVATE);
+                Boolean a=getSp.getBoolean("result",false);
+                if (a==false){
+                    Toast.makeText(context, "大哥 你没登录,别点了", Toast.LENGTH_SHORT).show();
+                }else {
+                    showSlertDialog();
+                //Log.d("MenuFragment", "a:********" + a);
+                }
+
                 break;
 
             //外围最大背景监听
@@ -167,5 +187,38 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
 
     public interface MenuDetailOnClickListener {
         void menuDetailOnClick(int pos);
+    }
+    public  void showSlertDialog(){
+        //显示一个alertDialog需要使用AlertDialog.Builder
+        //builder对象可以对哦dialog进行各种参数的设置
+        AlertDialog.Builder alert=new AlertDialog.Builder(context);
+        //设置图标
+        alert.setIcon(R.mipmap.mirror_logo);
+        //设置标题
+        alert.setTitle("不要离开我!亲爱的n(*≧▽≦*)n");
+        //设置要注意的东西
+       // alert.setMessage("离开我 亲将失去很多特权哦");
+       // Log.d("MenuFragment", "aaaaaa");
+        //点击监听 确定
+        alert.setPositiveButton("忍痛离开", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences sp = context.getSharedPreferences("test",Context.MODE_PRIVATE);
+                //向硬盘中存储需要获得editor对象
+                SharedPreferences.Editor editor = sp.edit();
+                editor.clear();//清空方法（调用后也需要在提交才会清空）
+                editor.commit();
+                EventBusBean bean=new EventBusBean("登录");
+                eventBus.post(bean);
+            }
+        });
+        alert.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(context, "谢谢亲没有离开我,我将更加珍惜亲", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //调用builder.show方法 就可以吧alertDialog调用
+        alert.show();
     }
 }

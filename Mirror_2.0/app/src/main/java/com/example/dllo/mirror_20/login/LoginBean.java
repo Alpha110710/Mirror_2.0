@@ -2,6 +2,7 @@ package com.example.dllo.mirror_20.login;
 
 /**
  * Created by dllo on 16/6/23.
+ * 注册或登录时网络请求用的bean
  */
 public class LoginBean {
 
