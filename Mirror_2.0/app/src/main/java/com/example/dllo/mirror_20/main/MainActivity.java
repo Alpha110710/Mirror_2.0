@@ -10,6 +10,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dllo.mirror_20.R;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
     private MenuFragment menuFragment;
     private ImageView mainMirrorImg;
     private TextView mainLoginTv;
+    private  long mTime;//用来记录用户第一次点击返回键时的时间
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,5 +115,14 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
 
     }
 
+    @Override
+    public void onBackPressed() {
 
+        if (System.currentTimeMillis() - mTime > 2000) {
+            mTime = System.currentTimeMillis();//System.currentTimeMillis()是用来获取当前时间
+            Toast.makeText(this, "小主，两秒内连点两下小的就挂啦", Toast.LENGTH_SHORT).show();
+        } else {
+            System.exit(0);
+        }
+    }
 }
