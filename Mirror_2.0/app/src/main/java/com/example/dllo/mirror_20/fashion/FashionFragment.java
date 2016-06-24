@@ -19,6 +19,7 @@ public class FashionFragment extends BaseFragment {
     public static Fragment createFragment(ProjectShareBean.DataBean.ListBean.StoryDataBean.TextArrayBean textArrayBeen){
         Fragment newFragment=new FashionFragment();
         Bundle bundle=new Bundle();
+        //给自己传的
         bundle.putString("smallTitle", textArrayBeen.getSmallTitle());
         bundle.putString("title", textArrayBeen.getTitle());
         bundle.putString("subTitle", textArrayBeen.getSubTitle());
@@ -39,6 +40,7 @@ public class FashionFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        //在这里接收
         smallTitle.setText(getArguments().getString("smallTitle"));
         title.setText(getArguments().getString("title"));
         subTitle.setText(getArguments().getString("subTitle"));

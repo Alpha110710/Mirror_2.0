@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dllo.mirror_20.Bean.EventBusBean;
 import com.example.dllo.mirror_20.R;
 
 import com.example.dllo.mirror_20.allcategories.AllCategoriesFragment;
@@ -20,6 +21,9 @@ import com.example.dllo.mirror_20.projectshare.ProjectShareFragment;
 import com.example.dllo.mirror_20.shoppingcart.ShoppingCartFragment;
 import com.example.dllo.mirror_20.sunglasses.SunglassesFragment;
 import com.example.dllo.mirror_20.view.VerticalViewPager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -32,10 +36,13 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
     private ImageView mainMirrorImg;
     private TextView mainLoginTv;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //注册EventBus
+        EventBus.getDefault().register(this);
 
         mainVerticalViewpager = (VerticalViewPager) findViewById(R.id.main_vertical_viewpager);
         mainFrameLayout = (FrameLayout) findViewById(R.id.main_frame_layout);
@@ -69,8 +76,12 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
                 showScaleAnim(mainMirrorImg);
                 break;
             case R.id.main_login_tv:
+                if (mainLoginTv.getText().toString().equals("登录")){
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                }else {
+                    mainVerticalViewpager.setCurrentItem(4);
+                }
                 break;
         }
     }
@@ -112,6 +123,15 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
         mainVerticalViewpager.setCurrentItem(pos);
 
     }
+    @Subscribe
+    public void setBuyCar(EventBusBean eventBusBean) {
+        String text = eventBusBean.text;
+        mainLoginTv.setText(text);
+    }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

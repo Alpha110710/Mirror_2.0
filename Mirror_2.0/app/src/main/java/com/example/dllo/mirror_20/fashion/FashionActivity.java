@@ -34,6 +34,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
     private FashionAdapter fashionAdapter;
     private ProjectShareBean bBean;
     private int pos;
+    //在这里进行解析
     private NetworkListener networkListener = new NetworkListener() {
         @Override
         public void onSuccessed(String result) {
@@ -41,12 +42,14 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
             bBean = gson.fromJson(result, ProjectShareBean.class);
 
             Intent intent=getIntent();
-
+            //接收传过来的position值  这个position是用来确定第几个item点击的
             pos=intent.getIntExtra("position",0);
-            for (int i = 0; i < bBean.getData().getList().get(pos).getStory_data().getText_array().size(); i++) {
-                fragments.add(FashionFragment.createFragment(
-                        bBean.getData().getList().get(pos).getStory_data().getText_array().get(i)));
 
+            for (int i = 0; i < bBean.getData().getList().get(pos).getStory_data().getText_array().size(); i++) {
+                //传的是一个类
+                fragments.add(FashionFragment.createFragment(bBean.getData().getList().get(pos).getStory_data().getText_array().get(i)));
+
+                //解析背景里面的图片
                 networkTools.getNetworkImage(bBean.getData().getList().get(pos)
                                 .getStory_data().getImg_array().get(0),
                         fashionBackgroundImg);
@@ -61,7 +64,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
 
         }
     };
-
+        //viewPager的接听事件
     private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -70,7 +73,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
 
         @Override
         public void onPageSelected(int position) {
-
+            //viewPager每滑动一次 都要给activity换background
             networkTools.getNetworkImage(bBean.getData().getList().get(pos)
                             .getStory_data().getImg_array().get(position),
                     fashionBackgroundImg);
@@ -91,16 +94,19 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
         close = (Button) findViewById(R.id.fashion_close);
         share = (Button) findViewById(R.id.fashion_share);
         fashionBackgroundImg = (ImageView) findViewById(R.id.fashion_background_img);
+        //设置图片拉伸全屏
         fashionBackgroundImg.setScaleType(ImageView.ScaleType.FIT_XY);
 
         networkTools = new NetworkTools();
         map = new HashMap<>();
+        //fragment数据是在这装进去的
         fashionAdapter = new FashionAdapter(getSupportFragmentManager());
         fragments = new ArrayList<>();
 
         verticalViewPager.setAdapter(fashionAdapter);
-
+        //拼的参数
         map.put("device_type", "1");
+        //解析
         networkTools.getNetworkPostData(url, map, networkListener);
 
 //        close.setFocusable(true);
@@ -116,7 +122,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
 
         close.setOnClickListener(this);
         share.setOnClickListener(this);
-
+        //viewPager点击
         verticalViewPager.setOnPageChangeListener(onPageChangeListener);
 
     }
@@ -138,7 +144,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fashion_close:
-           finish();
+                finish();
                 break;
             case R.id.fashion_share:
                 Toast.makeText(this, "没写呢,点我干啥", Toast.LENGTH_SHORT).show();
