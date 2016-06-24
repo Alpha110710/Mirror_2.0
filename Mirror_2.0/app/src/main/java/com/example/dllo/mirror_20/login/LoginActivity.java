@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.dllo.mirror_20.Bean.EventBusBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.App;
 import com.example.dllo.mirror_20.base.BaseActivity;
@@ -26,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,10 +47,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private CheckBox checkBox;
     private NetworkTools networkTools;
     private Boolean flag;
+    private EventBus eventBus;
 
     @Override
     public void initActivity() {
         setContentView(R.layout.activity_login);
+        eventBus=EventBus.getDefault();
 
         phoneNumber = (EditText) findViewById(R.id.activity_login_phoneNumber);
         password = (EditText) findViewById(R.id.activity_login_password);
@@ -67,6 +71,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         passwords = intent.getStringExtra("password");
         phoneNumber.setText(phone);
         password.setText(passwords);
+        //checkBox监听事件
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -79,7 +84,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
             }
         });
-
+        //editext的监听事件
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,6 +98,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             @Override
             public void afterTextChanged(Editable s) {
+                //如果输入框不为空 显示图片  并且可点击
                 if (!s.toString().equals("")) {
                     login.setBackgroundResource(R.mipmap.createuserbuttton);
                     login.setEnabled(true);
@@ -111,21 +117,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 phone = phoneNumber.getText().toString();
                 passwords = password.getText().toString();
                 // login.setEnabled(false);
+                //判断电话号够不够11位
                 if (phoneNumber.length() != 11) {
                     Toast.makeText(this, "手机号位数不够", Toast.LENGTH_SHORT).show();
-                } else if (isMobile(phone) == false) {
+                } else if (isMobile(phone) == false) {//判断是不是电话号
                     Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
-                } else if (!passwords.equals("")) {
+                } else if (!passwords.equals("")) {//密码不为空
+                    //可以点了
                     login.setEnabled(true);
                     HashMap<String, String> map = new HashMap<>();
                     map.put("phone_number", phone);
                     map.put("password", passwords);
+                    //请求数据
                     networkTools.getNetworkPostData(URLValue.LOGIN, map, new NetworkListener() {
                         @Override
                         public void onSuccessed(String result) {
                             LoginBean loginBean = new LoginBean();
                            // Log.d("LoginActivity", result.toString());
-
+                                //开始用Gson解析 不好用 因为Data里面返回的有时候是数组  有时候是字符串
+                            // 所以这里改成手动解析了
                             try {
                                 JSONObject object = new JSONObject(result);
                                 if (object.has("result")) {
@@ -136,20 +146,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             loginBean.setMsg(object.getString("msg"));
                                             Toast.makeText(LoginActivity.this, loginBean.getMsg(), Toast.LENGTH_SHORT).show();
                                         }
-                                    } else if (loginBean.getResult().equals("1")) {
+                                    } else if (loginBean.getResult().equals("1")) {//当result等于1时候 说明登录成功
 
                                         Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                                         if (object.has("data")){
                                             LoginBean.DataBean dataBean = new LoginBean.DataBean();
                                             JSONObject object1 = new JSONObject(object.getString("data"));
                                             if (object1.has("token")){
+                                                //token应该是用户最核心的
                                                 dataBean.setToken(object1.getString("token"));
                                             }
                                             if (object1.has("uid")){
                                                 dataBean.setUid(object1.getString("uid"));
-
                                             }
-
                                             //利用SP存储这些登录返回数据
                                             SharedPreferences sp = getSharedPreferences("test",MODE_PRIVATE);
                                             //向硬盘中存储需要获得editor对象
@@ -163,6 +172,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             editor.putString("uid",dataBean.getUid());
                                             //保存所有的editor设置的信息（需要提交后才能保存）
                                             editor.commit();
+                                            //用eventBus发布出去
+                                            EventBusBean bean=new EventBusBean("购物车");
+                                            eventBus.post(bean);
+
                                             finish();
                                         }
                                     }
@@ -178,7 +191,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                         @Override
                         public void onFailed(VolleyError error) {
-                            Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "请求失败,请检查网络", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -187,6 +200,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 break;
             case R.id.login_register_id:
+                //跳转注册页面
                 Intent intent = new Intent(App.context, RegisterActivity.class);
                 startActivity(intent);
                 break;
@@ -196,7 +210,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         }
     }
-
+//这个方法是判断是否是电话号的
     public static boolean isMobile(String str) {
         Pattern p = null;
         Matcher m = null;

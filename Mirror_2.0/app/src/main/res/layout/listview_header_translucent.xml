@@ -128,14 +128,14 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="38px"
-        android:layout_marginRight="38px"
         android:background="@color/colorWhite">
 
         <TextView
             android:id="@+id/header_translucent_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="38px"
+            android:layout_marginRight="38px"
             android:layout_marginTop="102px"
             android:text="女款｜晶粉貓眼太陽鏡"
             android:textColor="@color/colorBlack"
@@ -146,6 +146,8 @@
             android:layout_width="match_parent"
             android:layout_height="15px"
             android:layout_below="@id/header_translucent_title_tv"
+            android:layout_marginLeft="38px"
+            android:layout_marginRight="38px"
             android:layout_marginTop="24px"
             android:background="@mipmap/lineblack" />
     </com.zhy.autolayout.AutoRelativeLayout>

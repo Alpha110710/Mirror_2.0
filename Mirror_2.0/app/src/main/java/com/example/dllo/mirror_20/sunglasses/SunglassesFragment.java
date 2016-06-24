@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.allcategories.AllCategoriesDetailActivity;
+import com.example.dllo.mirror_20.allcategories.AllCategoriesFragment;
 import com.example.dllo.mirror_20.allcategories.AllCategoriesRVAdapter;
 import com.example.dllo.mirror_20.allcategories.MyRvOnClickListener;
 import com.example.dllo.mirror_20.base.BaseFragment;
@@ -84,18 +85,14 @@ public class SunglassesFragment extends BaseFragment implements MyRvOnClickListe
     //RecyclerView的点击事件
     @Override
     public void onClick(int position) {
-        Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context,AllCategoriesDetailActivity.class);
-        Bundle bundle = new Bundle();
-        DataAllBean.DataBean.ListBean.DataInfoBean newBean =  bean.getData().getList().get(position).getData_info();
-        bundle.putParcelable("newBean", newBean);
-        intent.putExtras(bundle);
+        intent.putExtra("position", position);
         startActivity(intent);
     }
 
     //fragment头标题的点击事件
     @Override
     public void onClick(View v) {
-        Toast.makeText(context, "别点了，还没加效果呢", Toast.LENGTH_SHORT).show();
+        ((AllCategoriesFragment.MenuOnClickListener) getActivity()).menuOnClick();
     }
 }
