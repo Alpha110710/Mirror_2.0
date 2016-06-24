@@ -167,6 +167,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             //数据已key-value的形式写在文件中
                                             editor.putBoolean("result",loginBean.getResult().equals("1"));
                                             editor.putString("token",dataBean.getToken());
+
+                                            Log.d("LoginActivity--------", dataBean.getToken());
                                             editor.putString("uid",dataBean.getUid());
                                             //保存所有的editor设置的信息（需要提交后才能保存）
                                             editor.commit();

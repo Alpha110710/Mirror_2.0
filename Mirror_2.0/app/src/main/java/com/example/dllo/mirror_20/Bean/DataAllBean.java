@@ -499,7 +499,7 @@ public class DataAllBean implements Parcelable {
                 }
 
 
-                public class DesignDesBean {
+                public static class DesignDesBean {
                     private String img;
                     private String cellHeight;
                     private String type;
