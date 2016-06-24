@@ -68,7 +68,7 @@ public class VerticalViewPager extends ViewGroup {
 
     /**
      * Used to track what the expected number of items in the adapter should be.
-     * If the app changes this when we don't expect it, we'll throw a big
+     * If the app changes this when we don't expect it, we' throw a big
      * obnoxious exception.
      */
     private int mExpectedAdapterCount;

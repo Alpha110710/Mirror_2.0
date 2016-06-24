@@ -6,9 +6,9 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
@@ -36,7 +36,10 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
     private HashMap<String, String> map;
     private FashionAdapter fashionAdapter;
     private ProjectShareBean bBean;
-    private int pos;
+    private DataAllBean dataAllBean;
+    private int pos = -1;
+    private int specialPos = -1;
+    private String specialUrl = "http://lizhongren.com.cn/mengke/jsonhandle.php";
     //在这里进行解析
     private NetworkListener networkListener = new NetworkListener() {
         @Override
@@ -44,9 +47,6 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
             Gson gson = new Gson();
             bBean = gson.fromJson(result, ProjectShareBean.class);
 
-            Intent intent=getIntent();
-            //接收传过来的position值  这个position是用来确定第几个item点击的
-            pos=intent.getIntExtra("position",0);
 
             for (int i = 0; i < bBean.getData().getList().get(pos).getStory_data().getText_array().size(); i++) {
                 //传的是一个类
@@ -67,7 +67,36 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
 
         }
     };
-        //viewPager的接听事件
+
+
+    private NetworkListener networkListenerSpecial = new NetworkListener() {
+        @Override
+        public void onSuccessed(String result) {
+            Gson gson = new Gson();
+            dataAllBean = gson.fromJson(result, DataAllBean.class);
+
+
+            for (int i = 0; i < dataAllBean.getData().getList().get(specialPos).getData_info().getStory_data().getText_array().size(); i++) {
+                //传的是一个类
+                fragments.add(FashionFragment.createFragment(dataAllBean.getData().getList().get(specialPos).getData_info().getStory_data().getText_array().get(i)));
+
+                //解析背景里面的图片
+                networkTools.getNetworkImage(dataAllBean.getData().getList().get(specialPos)
+                                .getData_info().getStory_data().getImg_array().get(0),
+                        fashionBackgroundImg);
+
+            }
+
+            fashionAdapter.setFragments(fragments);
+        }
+
+        @Override
+        public void onFailed(VolleyError error) {
+
+        }
+    };
+
+    //viewPager的接听事件
     private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -77,9 +106,18 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
         @Override
         public void onPageSelected(int position) {
             //viewPager每滑动一次 都要给activity换background
-            networkTools.getNetworkImage(bBean.getData().getList().get(pos)
-                            .getStory_data().getImg_array().get(position),
-                    fashionBackgroundImg);
+
+            if (pos != -1) {
+
+                networkTools.getNetworkImage(bBean.getData().getList().get(pos)
+                                .getStory_data().getImg_array().get(position),
+                        fashionBackgroundImg);
+            } else if (specialPos != -1) {
+                networkTools.getNetworkImage(dataAllBean.getData().getList().get(specialPos)
+                                .getData_info().getStory_data().getImg_array().get(position),
+                        fashionBackgroundImg);
+            }
+
         }
 
         @Override
@@ -97,6 +135,13 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
         close = (Button) findViewById(R.id.fashion_close);
         share = (Button) findViewById(R.id.fashion_share);
         fashionBackgroundImg = (ImageView) findViewById(R.id.fashion_background_img);
+
+        Intent intent = getIntent();
+        //接收传过来的position值  这个position是用来确定第几个item点击的
+        pos = intent.getIntExtra("position", -1);
+        specialPos = intent.getIntExtra("pos", -1);
+
+
         //设置图片拉伸全屏
         fashionBackgroundImg.setScaleType(ImageView.ScaleType.FIT_XY);
 
@@ -107,21 +152,16 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
         fragments = new ArrayList<>();
 
         verticalViewPager.setAdapter(fashionAdapter);
-        //拼的参数
-        map.put("device_type", "1");
-        //解析
-        networkTools.getNetworkPostData(url, map, networkListener);
 
-//        close.setFocusable(true);
-//        close.setFocusableInTouchMode(true);
-//        close.requestFocus();
-//        close.requestFocusFromTouch();
-//        share.setFocusable(true);
-//        share.setFocusableInTouchMode(true);
-//        share.requestFocus();
-//        share.requestFocusFromTouch();
-//        close.setOnFocusChangeListener(this);
-//        share.setOnFocusChangeListener(this);
+        if (pos != -1) {
+            //拼的参数
+            map.put("device_type", "1");
+            //解析
+            networkTools.getNetworkPostData(url, map, networkListener);
+        } else if (specialPos != -1) {
+            networkTools.getNetworkData(specialUrl, networkListenerSpecial);
+        }
+
 
         close.setOnClickListener(this);
         share.setOnClickListener(this);
@@ -130,18 +170,6 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-
-//    @Override
-//    public void OnClick(View v, boolean hasFocus) {
-//        switch (v.getId()) {
-//            case R.id.fashion_close:
-//                finish();
-//                break;
-//            case R.id.fashion_share:
-//                Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show();
-//                break;
-//        }
-//    }
 
     @Override
     public void onClick(View v) {

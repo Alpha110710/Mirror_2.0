@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
         mainFrameLayout = (FrameLayout) findViewById(R.id.main_frame_layout);
         mainMirrorImg = (ImageView) findViewById(R.id.main_mirror_img);
         mainLoginTv = (TextView) findViewById(R.id.main_login_tv);
-
+        //其实判断用户是否登录
         judgeLogin();
 
         mainMirrorImg.setOnClickListener(this);
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
         fragments = new ArrayList<>();
         fragments.add(new AllCategoriesFragment());
 
+        //又复用两个fragment
         fragments.add(new FlatLightFragment());
         fragments.add(new SunglassesFragment());
         fragments.add(new ProjectShareFragment());
@@ -82,17 +83,21 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
                 showScaleAnim(mainMirrorImg);
                 break;
             case R.id.main_login_tv:
+                //判断是否显示登录
                 if (mainLoginTv.getText().toString().equals("登录")) {
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                 } else {
+                    //容错处理
                     if (menuFragment == null){
                         mainVerticalViewpager.setCurrentItem(4);
                         return;
                     }
+                    //判断menufragment状态, 没有隐藏则把他隐藏
                     if (!menuFragment.isHidden()) {
                         getSupportFragmentManager().beginTransaction().hide(menuFragment).commit();
                     }
+                    //设置viewPager滑动第四个item
                     mainVerticalViewpager.setVisibility(View.VISIBLE);
                     mainVerticalViewpager.setCurrentItem(4);
                 }

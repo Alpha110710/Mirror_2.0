@@ -5,18 +5,32 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
 import com.example.dllo.mirror_20.projectshare.ProjectShareBean;
 
 /**
  * Created by dllo on 16/6/23.
+ * FlatLightFragment
+ * SunglassesFragment
  */
 public class FashionFragment extends BaseFragment {
     private TextView smallTitle,title,subTitle;
 
 
     public static Fragment createFragment(ProjectShareBean.DataBean.ListBean.StoryDataBean.TextArrayBean textArrayBeen){
+        Fragment newFragment=new FashionFragment();
+        Bundle bundle=new Bundle();
+        //给自己传的
+        bundle.putString("smallTitle", textArrayBeen.getSmallTitle());
+        bundle.putString("title", textArrayBeen.getTitle());
+        bundle.putString("subTitle", textArrayBeen.getSubTitle());
+        newFragment.setArguments(bundle);
+        return  newFragment;
+    }
+
+    public static Fragment createFragment(DataAllBean.DataBean.ListBean.DataInfoBean.StoryDataBean.TextArrayBean textArrayBeen){
         Fragment newFragment=new FashionFragment();
         Bundle bundle=new Bundle();
         //给自己传的

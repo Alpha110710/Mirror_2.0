@@ -1,20 +1,13 @@
 package com.example.dllo.mirror_20.allcategories;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -26,12 +19,9 @@ import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
-import com.example.dllo.mirror_20.view.NoScrollListview;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -62,6 +52,12 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
             //给里面listview适配器设置数据
             List<DataAllBean.DataBean.ListBean.DataInfoBean.DesignDesBean> designDesBeans = dataAllBean.getData().getList().get(position).getData_info().getDesign_des();
             detailActivityInListViewAdapter.setDesignDesBeans(designDesBeans);
+
+            //设置里面listview头的内容
+            headerTranslucentInfoDesTv.setText(dataAllBean.getData().getList().get(position).getData_info().getInfo_des());
+            headerTranslucentBrandTv.setText(dataAllBean.getData().getList().get(position).getData_info().getBrand());
+            headerTranslucentGoodsNameTv.setText(dataAllBean.getData().getList().get(position).getData_info().getGoods_name());
+            headeTranslucentGoodsPriceTv.setText(dataAllBean.getData().getList().get(position).getData_info().getGoods_price());
         }
 
         @Override
@@ -80,6 +76,10 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
     private int pos = -1;
     private boolean flag = true;
     private TextView allCategoriesDetailRlayoutPictureTv, allCategoriesDetailRlayoutBuyTv;
+    private TextView headerTranslucentInfoDesTv;
+    private TextView headerTranslucentBrandTv;
+    private TextView headerTranslucentGoodsNameTv;
+    private TextView headeTranslucentGoodsPriceTv;
 
     @Override
     public void initActivity() {
@@ -89,9 +89,9 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
         allCategoriesDetailOutListView = (ListView) findViewById(R.id.all_categories_detail_out_list_view);
         allCategoriesDetailInListView = (ListView) findViewById(R.id.all_categories_detail_in_list_view);
         allCategoriesDetailRlayout = (RelativeLayout) findViewById(R.id.all_categories_detail_rlayout);
-        allCategoriesDetailRlayoutBackImg = (ImageView)findViewById(R.id.all_categories_detail_rlayout_back_img);
-        allCategoriesDetailRlayoutPictureTv = (TextView)findViewById(R.id.all_categories_detail_rlayout_picture_tv);
-        allCategoriesDetailRlayoutBuyTv = (TextView)findViewById(R.id.all_categories_detail_rlayout_buy_tv);
+        allCategoriesDetailRlayoutBackImg = (ImageView) findViewById(R.id.all_categories_detail_rlayout_back_img);
+        allCategoriesDetailRlayoutPictureTv = (TextView) findViewById(R.id.all_categories_detail_rlayout_picture_tv);
+        allCategoriesDetailRlayoutBuyTv = (TextView) findViewById(R.id.all_categories_detail_rlayout_buy_tv);
 
 
         detailActivityOutListViewAdapter = new DetailActivityOutListViewAdapter(this);
@@ -106,6 +106,10 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
         //头布局
         View view = LayoutInflater.from(this).inflate(R.layout.listview_header_translucent, null);
         relativeheaderTranslucentBackRlayoutLayout = (RelativeLayout) view.findViewById(R.id.header_translucent_back_rlayout);
+        headerTranslucentInfoDesTv = (TextView) view.findViewById(R.id.header_translucent_info_des_tv);
+        headerTranslucentBrandTv = (TextView) view.findViewById(R.id.header_translucent_brand_tv);
+        headerTranslucentGoodsNameTv = (TextView) view.findViewById(R.id.header_translucent_goods_name_tv);
+        headeTranslucentGoodsPriceTv = (TextView) view.findViewById(R.id.header_translucent_goods_price_tv);
 
         final View viewOut = LayoutInflater.from(this).inflate(R.layout.listview_header_transparent, null);
         View viewFlow = LayoutInflater.from(this).inflate(R.layout.listview_out_flow, null);
@@ -131,6 +135,17 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                //头布局渐变
+                View b = allCategoriesDetailInListView.getChildAt(0);
+                if (b == null){
+                    return;
+                }
+                int scrollyHeader = -b.getTop();
+                relativeheaderTranslucentBackRlayoutLayout.setAlpha(1.1f - (float)scrollyHeader/1700);
+
+
+
                 //参考view为里面listview的第一个item
                 View view1 = allCategoriesDetailInListView.getChildAt(1);
                 if (view1 == null) {
@@ -213,7 +228,7 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.all_categories_detail_rlayout_back_img:
                 finish();
                 break;

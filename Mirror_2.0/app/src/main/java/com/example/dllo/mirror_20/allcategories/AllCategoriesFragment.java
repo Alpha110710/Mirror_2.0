@@ -1,26 +1,20 @@
 package com.example.dllo.mirror_20.allcategories;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
-import com.example.dllo.mirror_20.main.MainActivity;
+import com.example.dllo.mirror_20.fashion.FashionActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.google.gson.Gson;
 import com.zhy.autolayout.AutoLinearLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dllo on 16/6/21.
@@ -88,12 +82,17 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
     //RecyclerView的点击事件
     @Override
     public void onClick(int position) {
+        if (bean.getData().getList().get(position).getType().equals("1") ){
+            Intent intent = new Intent(context, AllCategoriesDetailActivity.class);
+            intent.putExtra("position", position);
+            startActivity(intent);
+        }else {
+            Intent intent = new Intent(context, FashionActivity.class);
+            intent.putExtra("pos", position);
+            startActivity(intent);
+        }
 
 
-        Intent intent = new Intent(context, AllCategoriesDetailActivity.class);
-        intent.putExtra("position", position);
-
-        startActivity(intent);
     }
 
     //fragment头标题的点击事件
