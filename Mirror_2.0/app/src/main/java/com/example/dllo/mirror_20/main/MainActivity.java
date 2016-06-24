@@ -1,6 +1,8 @@
 package com.example.dllo.mirror_20.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
         mainMirrorImg = (ImageView) findViewById(R.id.main_mirror_img);
         mainLoginTv = (TextView) findViewById(R.id.main_login_tv);
 
+        judgeLogin();
+
         mainMirrorImg.setOnClickListener(this);
         mainLoginTv.setOnClickListener(this);
 
@@ -82,6 +86,14 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                 } else {
+                    if (menuFragment == null){
+                        mainVerticalViewpager.setCurrentItem(4);
+                        return;
+                    }
+                    if (!menuFragment.isHidden()) {
+                        getSupportFragmentManager().beginTransaction().hide(menuFragment).commit();
+                    }
+                    mainVerticalViewpager.setVisibility(View.VISIBLE);
                     mainVerticalViewpager.setCurrentItem(4);
                 }
                 break;
@@ -102,6 +114,19 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
         bundle.putInt("pos", pos);
         menuFragment.setArguments(bundle);
 
+    }
+
+    //判断登录状态
+    private void judgeLogin() {
+        //要想取出数据的话，同样需要操作SharedPreference的对象
+        SharedPreferences getSp = getSharedPreferences("test", Context.MODE_PRIVATE);
+        Boolean a = getSp.getBoolean("result", false);
+        if (a == false) {
+            mainLoginTv.setText("登录");
+        } else {
+            mainLoginTv.setText("购物车");
+
+        }
     }
 
     //设置mirror动画
