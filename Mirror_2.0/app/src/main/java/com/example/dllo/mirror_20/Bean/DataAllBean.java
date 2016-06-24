@@ -69,7 +69,7 @@ public class DataAllBean implements Parcelable {
         dest.writeString(msg);
     }
 
-    public static class DataBean implements Parcelable{
+    public static class DataBean implements Parcelable {
         /**
          * first_time : 1465989138
          * last_time : 1465956483
@@ -232,7 +232,7 @@ public class DataAllBean implements Parcelable {
                 dest.writeString(type);
             }
 
-            public static class DataInfoBean implements Parcelable  {
+            public static class DataInfoBean implements Parcelable {
                 private String goods_id;
                 private String goods_pic;
                 private String model;
@@ -251,7 +251,7 @@ public class DataAllBean implements Parcelable {
                 private String story_title;
                 private String story_img;
                 private List<GoodsDataBean> goods_data;
-            
+
                 private List<DesignDesBean> design_des;
 
                 protected DataInfoBean(Parcel in) {
@@ -542,10 +542,10 @@ public class DataAllBean implements Parcelable {
                         this.english = english;
                     }
 
-                    }
                 }
 
-                public static class DesignDesBean implements Parcelable{
+
+                public static class DesignDesBean implements Parcelable {
                     private String img;
                     private String cellHeight;
                     private String type;
@@ -607,3 +607,4 @@ public class DataAllBean implements Parcelable {
             }
         }
     }
+}
