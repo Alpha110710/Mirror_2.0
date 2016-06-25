@@ -37,6 +37,8 @@
         <activity android:name=".login.LoginActivity"
             android:launchMode="singleTop"/>
         <activity android:name=".fashion.FashionActivity"/>
+        <activity android:name=".allcategories.WearPictureActivity"/>
+        <activity android:name=".allcategories.BigPictureActivity"/>
 
         <activity
             android:name="com.mob.tools.MobUIShell"

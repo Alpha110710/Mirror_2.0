@@ -138,12 +138,11 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
 
                 //头布局渐变
                 View b = allCategoriesDetailInListView.getChildAt(0);
-                if (b == null){
+                if (b == null) {
                     return;
                 }
                 int scrollyHeader = -b.getTop();
-                relativeheaderTranslucentBackRlayoutLayout.setAlpha(1.1f - (float)scrollyHeader/1700);
-
+                relativeheaderTranslucentBackRlayoutLayout.setAlpha(1.1f - (float) scrollyHeader / 1700);
 
 
                 //参考view为里面listview的第一个item
@@ -234,6 +233,10 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
                 break;
             case R.id.all_categories_detail_rlayout_picture_tv:
                 //Todo: 调转播放界面
+                Intent intent = new Intent(this, WearPictureActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+
                 break;
             case R.id.all_categories_detail_rlayout_buy_tv:
                 //todo:判断登录,进入购买

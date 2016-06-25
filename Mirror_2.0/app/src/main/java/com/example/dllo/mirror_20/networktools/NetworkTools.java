@@ -67,7 +67,7 @@ public class NetworkTools {
 
 
     public void getNetworkImage(String url, ImageView imageView) {
-        loader.get(url, new ImageListenerWithAlpha(R.mipmap.bg, R.mipmap.bg, imageView));
+        loader.get(url, new ImageListenerWithAlpha(R.mipmap.grey_background, R.mipmap.grey_background, imageView));
     }
 
 
