@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by dllo on 16/6/21.
  */
-public class DataAllBean implements Parcelable {
+public class DataAllBean {
 
 
     private String result;
@@ -17,22 +17,9 @@ public class DataAllBean implements Parcelable {
 
     private DataBean data;
 
-    protected DataAllBean(Parcel in) {
-        result = in.readString();
-        msg = in.readString();
-    }
 
-    public static final Creator<DataAllBean> CREATOR = new Creator<DataAllBean>() {
-        @Override
-        public DataAllBean createFromParcel(Parcel in) {
-            return new DataAllBean(in);
-        }
 
-        @Override
-        public DataAllBean[] newArray(int size) {
-            return new DataAllBean[size];
-        }
-    };
+
 
     public String getResult() {
         return result;
@@ -58,16 +45,7 @@ public class DataAllBean implements Parcelable {
         this.data = data;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(result);
-        dest.writeString(msg);
-    }
 
     public static class DataBean implements Parcelable {
         /**

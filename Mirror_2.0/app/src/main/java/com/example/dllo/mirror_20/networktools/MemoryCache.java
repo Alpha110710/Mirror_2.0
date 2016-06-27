@@ -14,6 +14,7 @@ public class MemoryCache implements ImageLoader.ImageCache {
 
     public MemoryCache() {
         int maxSize = (int) (Runtime.getRuntime().maxMemory()/8/1024);
+
         lruCache = new LruCache<String,Bitmap>(maxSize){
             @Override
             protected int sizeOf(String key, Bitmap value) {

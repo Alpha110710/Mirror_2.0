@@ -11,4 +11,8 @@ public final class URLValue {
 
     public static final String LOGIN="http://api.mirroreye.cn/index.php/user/login";//登录
 
+    public static final String JOINBUCAR="http://api.mirroreye.cn/index.php/order/join_shopping_cart";//加入购物车
+
+
+
 }

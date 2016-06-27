@@ -43,8 +43,16 @@
             android:textColor="#fff"
             android:textSize="24px"/>
     </com.zhy.autolayout.AutoRelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/shopping_car_rl"
+        android:id="@+id/shopping_car_rv"
+        android:layout_width="match_parent"
+        android:layout_height="750px"
+        android:layout_marginTop="84px" />
     
     <com.zhy.autolayout.AutoRelativeLayout
+        android:visibility="gone"
+        android:id="@+id/shopping_car_img_relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

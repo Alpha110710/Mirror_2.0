@@ -36,6 +36,7 @@
             android:name=".allcategories.AllCategoriesDetailActivity"
             android:process=":remote" />
         <activity android:name=".main.MainActivity" />
+
         <activity
             android:name=".login.LoginActivity"
             android:launchMode="singleTop" />
@@ -46,6 +47,11 @@
         <activity
             android:name=".allcategories.BigPictureActivity"
             android:process=":remote" />
+
+
+        <activity android:name=".orderdetails.OrderDetailsActivity"/>
+        <activity android:name=".orderdetails.AllMyAddressActivity"/>
+        <activity android:name=".orderdetails.AddOrModifyAddressActivity"/>
 
         <activity
             android:name="com.mob.tools.MobUIShell"

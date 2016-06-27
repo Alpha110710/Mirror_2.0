@@ -65,7 +65,7 @@ public class DetailActivityInListViewAdapter extends BaseAdapter {
         }
 
         viewViewHolder.itemDetailActivityOutListviewImg.setScaleType(ImageView.ScaleType.FIT_XY);
-        networkTools.getNetworkImage(designDesBeans.get(position).getImg(), viewViewHolder.itemDetailActivityOutListviewImg);
+        networkTools.getNetworkImage(designDesBeans.get(position).getImg(), viewViewHolder.itemDetailActivityOutListviewImg,null);
 
         return convertView;
     }
