@@ -63,6 +63,7 @@ public class DetailActivityOutListViewAdapter extends BaseAdapter {
             viewViewHolder = (DetailActivityOutListViewViewHolder) convertView.getTag();
         }
 
+
         viewViewHolder.itemDetailActivityOutIntroContentTv.setText(goodsDataBeans.get(position).getIntroContent());
         //TODO:
         viewViewHolder.itemDetailActivityOutCountryTv.setText("韓國");

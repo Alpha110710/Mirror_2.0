@@ -155,7 +155,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
                 ((MenuDetailOnClickListener) getActivity()).menuDetailOnClick(0);
                 break;
             case R.id.menu_all_back_llayout:
-                //要想取出数据的话，同样需要操作SharedPreference的对象
+                //判断sp有没有存储 取出数据的话，同样需要操作SharedPreference的对象
                 SharedPreferences getSp = context.getSharedPreferences("test", Context.MODE_PRIVATE);
                 Boolean a=getSp.getBoolean("result",false);
                 if (a==false){

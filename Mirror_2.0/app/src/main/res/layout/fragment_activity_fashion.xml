@@ -4,8 +4,100 @@
     android:layout_height="match_parent"
     android:background="@null"
     android:orientation="vertical">
-
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/three_style_linearlayout"
+        android:layout_margin="15dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:id="@+id/fragment_fashion_three_smallTitle"
+            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="傳奇之上的眼鏡搖滾英雄"/>
+        <TextView
+            android:id="@+id/fragment_fashion_three_title"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="巴迪·霍利"
+            android:textColor="#cf2e38ff"
+            android:textSize="35sp"
+            />
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:id="@+id/fragment_fashion_three_subTitle"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="眼镜的流行趋势并不像服装一样变幻无常，经典的眼镜造型永远都不会有过时之说，20世纪50年代眼镜造型至今也被大量的时尚人士追捧。和曾经的喇叭裤一样，经典黑框眼镜款式在今年又有明显的回潮趋势。如果说戴黑框眼镜的人都是书呆子，那巴迪·霍利一定是第一个站出来不答应的，在上世纪50年代引领圆形大黑镜框的明星人物，就是这个在传奇之上的眼镜摇滚英雄巴迪·霍利。"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/notBox_style_relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="25dp"
+            android:id="@+id/fragment_fashion_nobox_verticalTitle"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="走向世界的少女心"
+            android:textColor="#F04055"
+            android:textSize="30sp"/>
+        <LinearLayout
+
+            android:layout_margin="15dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/fragment_fashion_nobox_smallTitle"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="T臺上的二次元少女"/>
+            <TextView
+                android:id="@+id/fragment_fashion_nobox_title"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="澳籍華人模特"
+                android:textColor="#ffffff"/>
+            <TextView
+                android:id="@+id/fragment_fashion_nobox_colorTitle"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fernanda Ly"
+                android:textColor="#F04055"/>
+            <TextView
+                android:id="@+id/fragment_fashion_nobox_subTitle"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2015年红起来的超模，除了Gigi，还有一个亚洲面孔，那就是Fernanda Ly。也许你对她的名字非常陌生，但是看到她的头发你一定会觉得眼熟——粉红色长直发。她不算漂亮，脸上有点小雀斑，看起来酷酷的，但笑起来天真可爱。"
+                android:textColor="#ffffff"/>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/box_style_linearlayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
