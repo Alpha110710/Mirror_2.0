@@ -113,6 +113,7 @@
             android:textSize="24px" />
 
         <ImageView
+            android:id="@+id/header_translucent_title_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/header_translucent_rlayout"
