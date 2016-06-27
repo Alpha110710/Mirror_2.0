@@ -21,6 +21,10 @@ public class NetworkTools {
     private RequestQueue requestQueue;
     private ImageLoader loader;
 
+    public ImageLoader getLoader() {
+        return loader;
+    }
+
     public NetworkTools() {
         requestQueue = VolleySingleton.getInstance().getRequestQueue();
         loader = VolleySingleton.getInstance().getLoader();
@@ -97,6 +101,27 @@ public class NetworkTools {
         public void onErrorResponse(VolleyError error) {
 
         }
+    }
+
+    //李爽写的imgloader方法
+    public void getImg(final ImageView imageView, String url) {
+
+        loader.get(url, new ImageLoader.ImageListener() {
+            @Override
+            public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
+
+                if (response.getBitmap() != null) {
+                    imageView.setImageBitmap(response.getBitmap());
+
+                }
+
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
     }
 
 

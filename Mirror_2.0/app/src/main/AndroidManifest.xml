@@ -10,8 +10,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -32,24 +32,32 @@
         </activity>
 
         <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".allcategories.AllCategoriesDetailActivity" />
+        <activity
+            android:name=".allcategories.AllCategoriesDetailActivity"
+            android:process=":remote" />
         <activity android:name=".main.MainActivity" />
-        <activity android:name=".login.LoginActivity"
-            android:launchMode="singleTop"/>
-        <activity android:name=".fashion.FashionActivity"/>
-        <activity android:name=".allcategories.WearPictureActivity"/>
-        <activity android:name=".allcategories.BigPictureActivity"/>
+        <activity
+            android:name=".login.LoginActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".fashion.FashionActivity" />
+        <activity
+            android:name=".allcategories.WearPictureActivity"
+            android:process=":remote" />
+        <activity
+            android:name=".allcategories.BigPictureActivity"
+            android:process=":remote" />
 
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
 
             <intent-filter>
                 <data android:scheme="tencent100371282" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -63,11 +71,10 @@
         <!--微信分享回调 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 
         <meta-data

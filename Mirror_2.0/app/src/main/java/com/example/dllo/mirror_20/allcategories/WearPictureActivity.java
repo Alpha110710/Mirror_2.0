@@ -28,6 +28,7 @@ import java.util.HashMap;
 
 /**
  * Created by dllo on 16/6/24.
+ * 图集穿戴
  */
 public class WearPictureActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
@@ -140,10 +141,6 @@ public class WearPictureActivity extends BaseActivity implements View.OnClickLis
 
                 if (!videoAddress.equals("")) {
 
-//                    ViewGroup.LayoutParams params = wearPictureVideoView.getLayoutParams();//设置参数
-//                    WindowManager wm = (WindowManager) this.getSystemService(WINDOW_SERVICE);
-//                    params.width = wm.getDefaultDisplay().getWidth();
-//                    wearPictureVideoView.setLayoutParams(params);
                     //设置播放是的焦点
                     wearPictureVideoView.requestFocus();
                     wearPictureVideoView.start();//播放
@@ -159,12 +156,10 @@ public class WearPictureActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    //在适配器里用的点击事件  这里没有用上
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Intent intent = new Intent(this, BigPictureActivity.class);
-        intent.putExtra("imgUrl", imgUrls.get(position - 1));
-        startActivity(intent);
 
     }
 }

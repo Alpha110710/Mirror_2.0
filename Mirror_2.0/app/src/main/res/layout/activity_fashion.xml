@@ -10,6 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
+    <com.example.dllo.mirror_20.view.VerticalViewPager
+        android:id="@+id/fashion_vertical_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <Button
         android:id="@+id/fashion_close"
         android:layout_width="25dp"
@@ -18,11 +24,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
         android:background="@mipmap/closeicon" />
-
-    <com.example.dllo.mirror_20.view.VerticalViewPager
-        android:id="@+id/fashion_vertical_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/fashion_share"

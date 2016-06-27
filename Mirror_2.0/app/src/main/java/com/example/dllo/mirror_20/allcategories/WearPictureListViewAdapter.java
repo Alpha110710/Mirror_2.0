@@ -1,6 +1,7 @@
 package com.example.dllo.mirror_20.allcategories;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,6 @@ public class WearPictureListViewAdapter extends BaseAdapter {
     }
 
 
-
     @Override
     public int getCount() {
         return imgUrls == null ? 0 : imgUrls.size();
@@ -51,19 +51,42 @@ public class WearPictureListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         WearPictureListViewViewHolder viewHolder = null;
-        if (convertView == null){
+        if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_listview_wear_picture, parent, false);
             viewHolder = new WearPictureListViewViewHolder(convertView);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (WearPictureListViewViewHolder) convertView.getTag();
         }
 //        networkTools.getNetworkImage(imgUrls.get(position), viewHolder.itemWearPictureImg);
+        //用的毕加索  为了剪裁图片
         Picasso.with(context).load(imgUrls.get(position)).centerInside().resize(800, 800).placeholder(R.mipmap.white_background)
                 .into(viewHolder.itemWearPictureImg);
+
+        final WearPictureListViewViewHolder finalViewHolder = viewHolder;
+        viewHolder.itemWearPictureImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, BigPictureActivity.class);
+                //跳转传值
+                intent.putExtra("position", position);
+                int[] location = new int[2];
+                finalViewHolder.itemWearPictureImg.getLocationOnScreen(location);
+                intent.putExtra("locationX", location[0]);
+                intent.putExtra("locationY", location[1]);
+                intent.putExtra("imgUrl", imgUrls.get(position));
+                intent.putExtra("width", finalViewHolder.itemWearPictureImg.getWidth());
+                intent.putExtra("height", finalViewHolder.itemWearPictureImg.getHeight());
+
+                context.startActivity(intent);
+                ((WearPictureActivity) context).overridePendingTransition(0, 0);
+
+            }
+        });
+
         return convertView;
     }
 
