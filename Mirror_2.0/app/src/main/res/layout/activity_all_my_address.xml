@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/all_my_address_layout_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px">
+
+        <TextView
+            android:id="@+id/all_my_address_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34px"
+            android:text="我的全部地址"
+            android:textColor="#333"
+            android:textSize="34px" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/all_my_address_name_tv"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="20px"
+            android:background="@mipmap/linecreateuser" />
+
+        <ImageView
+            android:id="@+id/all_my_address_back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="46px"
+            android:layout_marginTop="30px"
+            android:background="@mipmap/close" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <TextView
+        android:id="@+id/all_my_address_add_address_tv"
+        android:layout_width="match_parent"
+        android:layout_height="160px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="50px"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text="添加地址"
+        android:textSize="40px"
+        android:textColor="#333"/>
+    <ListView
+        android:id="@+id/all_my_address_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        />
+
+</com.zhy.autolayout.AutoLinearLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.dllo.mirror_20.R;
@@ -41,12 +42,14 @@ public class ProjectShareRvAdapter extends RecyclerView.Adapter<ProjectShareRvAd
     public ProjectShareViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_fragment_projectshare_recyclrview, parent, false);
         ProjectShareViewHolder holder = new ProjectShareViewHolder(view);
+
         return holder;
     }
 
     @Override
     public void onBindViewHolder(final ProjectShareViewHolder holder, int position) {
-        tools.getNetworkImage(bean.getData().getList().get(position).getStory_img(), holder.imageView);
+        holder.bar.setVisibility(View.VISIBLE);
+        tools.getNetworkImage(bean.getData().getList().get(position).getStory_img(), holder.imageView,holder.bar);
         holder.textView.setText(bean.getData().getList().get(position).getStory_title());
 
         if (listener != null) {
@@ -69,6 +72,7 @@ public class ProjectShareRvAdapter extends RecyclerView.Adapter<ProjectShareRvAd
         ImageView imageView;
         TextView textView;
         AutoLinearLayout linearLayout;
+        ProgressBar bar;
 
         public ProjectShareViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +80,7 @@ public class ProjectShareRvAdapter extends RecyclerView.Adapter<ProjectShareRvAd
             linearLayout = (AutoLinearLayout) itemView.findViewById(R.id.project_share_rv_item_ll);
             textView = (TextView) itemView.findViewById(R.id.project_share_rv_item_introduce);
             imageView = (ImageView) itemView.findViewById(R.id.project_share_rv_item_iv);
+            bar = (ProgressBar) itemView.findViewById(R.id.project_share_rv_item_pb);
         }
     }
 }

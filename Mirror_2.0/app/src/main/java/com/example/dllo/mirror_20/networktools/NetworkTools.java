@@ -1,7 +1,11 @@
 package com.example.dllo.mirror_20.networktools;
 
 import android.animation.ObjectAnimator;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -66,26 +70,34 @@ public class NetworkTools {
     }
 
 
-    public void getNetworkImage(String url, ImageView imageView) {
-        loader.get(url, new ImageListenerWithAlpha(R.mipmap.bg, R.mipmap.bg, imageView));
+    public void getNetworkImage(String url, ImageView imageView,ProgressBar progressBar) {
+        loader.get(url, new ImageListenerWithAlpha(R.mipmap.bg, R.mipmap.bg, imageView,progressBar));
+
     }
+
+
 
 
     class ImageListenerWithAlpha implements ImageLoader.ImageListener {
         int defaultIma, errorIma;
         ImageView imageView;
+        ProgressBar bar;
 
 
-        public ImageListenerWithAlpha(int defaultIma, int errorIma, ImageView imageView) {
+        public ImageListenerWithAlpha(int defaultIma, int errorIma, ImageView imageView,ProgressBar progressBar) {
             this.defaultIma = defaultIma;
             this.errorIma = errorIma;
             this.imageView = imageView;
+            this.bar = progressBar;
         }
 
         @Override
         public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
             if (response.getBitmap() != null) {
                 imageView.setImageBitmap(response.getBitmap());
+                if (bar != null) {
+                    bar.setVisibility(View.GONE);
+                }
 
             } else if (defaultIma != 0) {
                 imageView.setImageResource(defaultIma);
@@ -98,6 +110,7 @@ public class NetworkTools {
 
         }
     }
+
 
 
 }

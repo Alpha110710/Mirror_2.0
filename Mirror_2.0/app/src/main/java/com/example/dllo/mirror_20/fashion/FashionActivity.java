@@ -55,7 +55,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
                 //解析背景里面的图片
                 networkTools.getNetworkImage(bBean.getData().getList().get(pos)
                                 .getStory_data().getImg_array().get(0),
-                        fashionBackgroundImg);
+                        fashionBackgroundImg,null);
 
             }
 
@@ -79,7 +79,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
             //viewPager每滑动一次 都要给activity换background
             networkTools.getNetworkImage(bBean.getData().getList().get(pos)
                             .getStory_data().getImg_array().get(position),
-                    fashionBackgroundImg);
+                    fashionBackgroundImg,null);
         }
 
         @Override

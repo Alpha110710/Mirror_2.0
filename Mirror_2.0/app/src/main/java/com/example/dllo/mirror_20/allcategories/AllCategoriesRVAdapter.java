@@ -52,13 +52,14 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
+        holder.bar.setVisibility(View.VISIBLE);
         String url = bean.getData().getList().get(position).getData_info().getGoods_img();
         String url2 = bean.getData().getList().get(position).getData_info().getStory_img();
         switch (bean.getData().getList().get(position).getType()) {
             case "1":
                 holder.layout.setVisibility(View.VISIBLE);
                 holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                tools.getNetworkImage(url, holder.imageView);
+                tools.getNetworkImage(url, holder.imageView,holder.bar);
 
                 holder.englishTv.setText(bean.getData().getList().get(position).getData_info().getGoods_name());
                 holder.moneyTv.setText("¥" + bean.getData().getList().get(position).getData_info().getGoods_price());
@@ -67,7 +68,7 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
                 break;
             case "2":
                 holder.layout.setVisibility(View.GONE);
-                tools.getNetworkImage(url2, holder.imageView);
+                tools.getNetworkImage(url2, holder.imageView,holder.bar);
 
                 holder.introduceTv.setText(bean.getData().getList().get(position).getData_info().getStory_title());
 

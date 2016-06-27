@@ -37,6 +37,9 @@
         <activity android:name=".login.LoginActivity"
             android:launchMode="singleTop"/>
         <activity android:name=".fashion.FashionActivity"/>
+        <activity android:name=".orderdetails.OrderDetailsActivity"/>
+        <activity android:name=".orderdetails.AllMyAddressActivity"/>
+        <activity android:name=".orderdetails.AddOrModifyAddressActivity"/>
 
         <activity
             android:name="com.mob.tools.MobUIShell"
