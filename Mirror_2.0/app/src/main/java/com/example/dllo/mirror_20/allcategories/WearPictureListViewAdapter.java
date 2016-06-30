@@ -2,6 +2,7 @@ package com.example.dllo.mirror_20.allcategories;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,7 @@ public class WearPictureListViewAdapter extends BaseAdapter {
                 intent.putExtra("imgUrl", imgUrls.get(position));
                 intent.putExtra("width", finalViewHolder.itemWearPictureImg.getWidth());
                 intent.putExtra("height", finalViewHolder.itemWearPictureImg.getHeight());
+
 
                 context.startActivity(intent);
                 ((WearPictureActivity) context).overridePendingTransition(0, 0);

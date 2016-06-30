@@ -8,11 +8,13 @@
         android:layout_height="220dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="10dp">
 
         <VideoView
             android:id="@+id/wear_picture_video_view"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:fitsSystemWindows="true"
@@ -20,7 +22,7 @@
 
         <ImageView
             android:id="@+id/picture_header_picture_img"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true" />
 

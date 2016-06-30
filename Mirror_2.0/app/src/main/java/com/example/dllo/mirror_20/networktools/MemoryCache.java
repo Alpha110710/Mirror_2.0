@@ -10,15 +10,15 @@ import com.android.volley.toolbox.ImageLoader;
  */
 public class MemoryCache implements ImageLoader.ImageCache {
 
-    private LruCache<String,Bitmap> lruCache;
+    private LruCache<String, Bitmap> lruCache;
 
     public MemoryCache() {
-        int maxSize = (int) (Runtime.getRuntime().maxMemory()/8/1024);
+        int maxSize = (int) (Runtime.getRuntime().maxMemory() / 8 / 1024);
 
-        lruCache = new LruCache<String,Bitmap>(maxSize){
+        lruCache = new LruCache<String, Bitmap>(maxSize) {
             @Override
             protected int sizeOf(String key, Bitmap value) {
-                return value.getRowBytes()*value.getHeight()/1024;
+                return value.getRowBytes() * value.getHeight() / 1024;
             }
         };
     }
@@ -30,6 +30,6 @@ public class MemoryCache implements ImageLoader.ImageCache {
 
     @Override
     public void putBitmap(String url, Bitmap bitmap) {
-       lruCache.put(url,bitmap);
+        lruCache.put(url, bitmap);
     }
 }

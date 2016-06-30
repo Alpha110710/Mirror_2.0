@@ -307,13 +307,14 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
             case R.id.all_categories_detail_rlayout_buy_tv:
                 //todo:判断登录,进入购买
                 SharedPreferences getSp = getSharedPreferences("test", MODE_PRIVATE);
-                String token = getSp.getString("token", null);
-                if (token != null) {
+                String token = getSp.getString("token", "1");
+                Log.d("AllCategoriesDetailActi", token);
+                if (!token.equals("1")) {
                     Intent intent1 = new Intent(this, OrderDetailsActivity.class);
                     startActivity(intent1);
                 }else {
-                    Intent intent1 = new Intent(this, LoginActivity.class);
-                    startActivity(intent1);
+                    Intent intent2 = new Intent(this, LoginActivity.class);
+                    startActivity(intent2);
                 }
                 break;
             case R.id.header_translucent_title_share:
@@ -348,7 +349,7 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
 
-// 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
         //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
         oks.setTitle("我是Title");
