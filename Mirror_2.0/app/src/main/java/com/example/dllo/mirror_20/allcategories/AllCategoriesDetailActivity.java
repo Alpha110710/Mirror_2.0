@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DBBean;
+import com.example.dllo.mirror_20.Bean.DBDataBean;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.Bean.EventBusBean;
 import com.example.dllo.mirror_20.R;
@@ -37,6 +38,7 @@ import com.example.dllo.mirror_20.login.LoginBean;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.google.gson.Gson;
+import com.litesuits.orm.LiteOrm;
 import com.squareup.picasso.Picasso;
 
 import com.example.dllo.mirror_20.networktools.URLValue;
@@ -74,6 +76,13 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
     private String goods_price;
     private String model;
     private String product_area;
+    private String introContent;
+    private String cellHeight;
+    private String name;
+    private String location;
+    private String country;
+    private String english;
+
 
     private String goodsPic;//sun hao
     private String goodsName;//sun hao
@@ -88,8 +97,14 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
                 //解析背景图片
                 Picasso.with(AllCategoriesDetailActivity.this).load(dataAllBean.getData().getList().get(position).getData_info().getGoods_img())
                         .fit().into(allCategoriesDetailBackImg);
-
-
+                for (int i=0;i<dataAllBean.getData().getList().get(position).getData_info().getGoods_data().size();i++) {
+                    location = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getLocation();
+                    name = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getName();
+                    introContent = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getIntroContent();
+                    cellHeight = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getCellHeight();
+                    english = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getEnglish();
+                    country = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getCountry();
+                }
                 goods_id = dataAllBean.getData().getList().get(position).getData_info().getGoods_id();
                 goods_img = dataAllBean.getData().getList().get(position).getData_info().getGoods_img();
                 goods_name = dataAllBean.getData().getList().get(position).getData_info().getGoods_name();
@@ -114,6 +129,8 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
             headerTranslucentGoodsNameTv.setText(dataAllBean.getData().getList().get(position).getData_info().getGoods_name());
             headeTranslucentGoodsPriceTv.setText(dataAllBean.getData().getList().get(position).getData_info().getGoods_price());
         }
+
+
 
         @Override
         public void onFailed(VolleyError error) {
@@ -342,7 +359,6 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
         tools.insert(dbBean);
 
     }
-
     private void showShare() {
         ShareSDK.initSDK(this);
         OnekeyShare oks = new OnekeyShare();
