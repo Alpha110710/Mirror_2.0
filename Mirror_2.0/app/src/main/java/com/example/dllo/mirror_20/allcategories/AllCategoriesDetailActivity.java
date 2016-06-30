@@ -97,7 +97,9 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
                 model = dataAllBean.getData().getList().get(position).getData_info().getModel();
                 product_area = dataAllBean.getData().getList().get(position).getData_info().getProduct_area();
 
-
+                goodsPic = dataAllBean.getData().getList().get(position).getData_info().getGoods_pic();
+                goodsName = dataAllBean.getData().getList().get(position).getData_info().getGoods_name();
+                goodsPrice = dataAllBean.getData().getList().get(position).getData_info().getGoods_price();
 
             }
             //给外面listview适配器设置数据
@@ -307,12 +309,20 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
             case R.id.all_categories_detail_rlayout_buy_tv:
                 //todo:判断登录,进入购买
                 SharedPreferences getSp = getSharedPreferences("test", MODE_PRIVATE);
-                String token = getSp.getString("token", null);
-                if (token != null) {
+                String token = getSp.getString("token", "1+");
+                Log.d("AllCategoriesDetailActi", token);
+                if (!token.equals("1+")) {
                     Intent intent1 = new Intent(this, OrderDetailsActivity.class);
+                    intent1.putExtra("goodsPic",goodsPic);
+                    intent1.putExtra("goodsName",goodsName);
+                    intent1.putExtra("goodsPrice",goodsPrice);
                     startActivity(intent1);
                 }else {
                     Intent intent1 = new Intent(this, LoginActivity.class);
+                    intent1.putExtra("goodsPic",goodsPic);
+                    intent1.putExtra("goodsName",goodsName);
+                    intent1.putExtra("goodsPrice",goodsPrice);
+                    intent1.putExtra("type",1);
                     startActivity(intent1);
                 }
                 break;
@@ -348,8 +358,8 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
 
-// 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
-        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+          // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+         //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
         oks.setTitle("我是Title");
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用

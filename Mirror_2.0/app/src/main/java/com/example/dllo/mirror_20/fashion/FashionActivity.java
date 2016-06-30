@@ -118,9 +118,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
                         fashionBackgroundImg);
             }
 
-            networkTools.getNetworkImage(bBean.getData().getList().get(pos)
-                            .getStory_data().getImg_array().get(position),
-                    fashionBackgroundImg);
+
         }
 
         @Override

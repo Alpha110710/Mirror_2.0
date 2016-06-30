@@ -1,8 +1,6 @@
 package com.example.dllo.mirror_20.networktools;
 
-import android.animation.ObjectAnimator;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -25,9 +23,7 @@ public class NetworkTools {
     private RequestQueue requestQueue;
     private ImageLoader loader;
 
-    public ImageLoader getLoader() {
-        return loader;
-    }
+
 
     public NetworkTools() {
         requestQueue = VolleySingleton.getInstance().getRequestQueue();

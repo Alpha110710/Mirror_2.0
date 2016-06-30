@@ -1,5 +1,6 @@
 package com.example.dllo.mirror_20.orderdetails;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
@@ -115,6 +116,7 @@ public class AllMyAddressActivity extends BaseActivity implements View.OnClickLi
         Map<String,String> addMap = new HashMap<>();
         addMap.put("token",token);
         addMap.put("addr_id",bean.getData().getList().get(pos).getAddr_id());
+
 
 
         tools.getNetworkPostData(addUrl, addMap, new NetworkListener() {

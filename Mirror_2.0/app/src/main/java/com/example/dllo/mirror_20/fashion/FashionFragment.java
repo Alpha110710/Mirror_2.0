@@ -48,7 +48,13 @@ public class FashionFragment extends BaseFragment {
         //给自己传的
         bundle.putString("smallTitle", textArrayBeen.getSmallTitle());
         bundle.putString("title", textArrayBeen.getTitle());
+        bundle.putString("titleColor",textArrayBeen.getTitleColor());
         bundle.putString("subTitle", textArrayBeen.getSubTitle());
+        bundle.putString("verticalTitle",textArrayBeen.getVerticalTitle());
+        bundle.putString("verticalTitleColor",textArrayBeen.getVerticalTitleColor());
+        bundle.putString("colorTitle",textArrayBeen.getColorTitle());
+        bundle.putString("colorTitleColor",textArrayBeen.getColorTitleColor());
+        bundle.putString("category",textArrayBeen.getCategory());
         newFragment.setArguments(bundle);
         return  newFragment;
     }

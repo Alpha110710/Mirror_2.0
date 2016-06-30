@@ -23,6 +23,7 @@ import com.example.dllo.mirror_20.base.BaseActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.example.dllo.mirror_20.networktools.URLValue;
+import com.example.dllo.mirror_20.orderdetails.OrderDetailsActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -48,6 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private NetworkTools networkTools;
     private Boolean flag;
     private EventBus eventBus;
+    private int jump;
 
     @Override
     public void initActivity() {
@@ -60,6 +62,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         login = (Button) findViewById(R.id.login);
         register = (Button) findViewById(R.id.login_register_id);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
+
+
 
         login.setOnClickListener(this);
         login.setEnabled(false);
@@ -168,7 +172,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             editor.putBoolean("result",loginBean.getResult().equals("1"));
                                             editor.putString("token",dataBean.getToken());
 
-                                            Log.d("LoginActivity--------", dataBean.getToken());
                                             editor.putString("uid",dataBean.getUid());
                                             //保存所有的editor设置的信息（需要提交后才能保存）
                                             editor.commit();
@@ -176,7 +179,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             EventBusBean bean=new EventBusBean("购物车");
                                             eventBus.post(bean);
 
-                                            finish();
+                                            if (getIntent().getStringExtra("type").equals("1")) {
+                                                Intent orderDetaIntent = new Intent(LoginActivity.this, OrderDetailsActivity.class);
+                                                orderDetaIntent.putExtra("goodsPic",getIntent().getStringExtra("goodsPic"));
+                                                orderDetaIntent.putExtra("goodsName",getIntent().getStringExtra("goodsName"));
+                                                orderDetaIntent.putExtra("goodsPrice",getIntent().getStringExtra("goodsPrice"));
+                                                startActivity(orderDetaIntent);
+                                                finish();
+                                            } else {
+                                                finish();
+                                            }
+
                                         }
                                     }
                                 }

@@ -32,9 +32,7 @@
         </activity>
 
         <activity android:name=".login.RegisterActivity" />
-        <activity
-            android:name=".allcategories.AllCategoriesDetailActivity"
-            android:process=":remote" />
+        <activity android:name=".allcategories.AllCategoriesDetailActivity" />
         <activity android:name=".main.MainActivity" />
 
         <activity
@@ -49,9 +47,10 @@
             android:process=":remote" />
 
 
-        <activity android:name=".orderdetails.OrderDetailsActivity"/>
-        <activity android:name=".orderdetails.AllMyAddressActivity"/>
-        <activity android:name=".orderdetails.AddOrModifyAddressActivity"/>
+        <activity android:name=".orderdetails.OrderDetailsActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".orderdetails.AllMyAddressActivity" />
+        <activity android:name=".orderdetails.AddOrModifyAddressActivity" />
 
         <activity
             android:name="com.mob.tools.MobUIShell"

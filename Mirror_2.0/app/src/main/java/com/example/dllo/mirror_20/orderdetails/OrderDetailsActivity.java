@@ -35,6 +35,7 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
     private AllMyAddressBean bean;
 
 
+
     @Override
     public void initActivity() {
         setContentView(R.layout.activity_order_details);
@@ -56,6 +57,11 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
         addAddress.setOnClickListener(this);
         confirm.setOnClickListener(this);
         initMap();//给map加数据
+
+        //接AllCategoriesDetailActivity传过来的值
+        goodsName.setText(getIntent().getStringExtra("goodsName"));
+        money.setText("¥ "+getIntent().getStringExtra("goodsPrice"));
+        tools.getNetworkImage(getIntent().getStringExtra("goodsPic"),imageView,null);
 
         tools.getNetworkPostData(url, map, new NetworkListener() {
             @Override
@@ -85,8 +91,34 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tools.getNetworkPostData(url, map, new NetworkListener() {
+            @Override
+            public void onSuccessed(String result) {
+                Gson gson = new Gson();
+                bean = gson.fromJson(result,AllMyAddressBean.class);
 
+                if (bean.getData().getList().toString().equals("[]")){
+                    pleaseAdd.setVisibility(View.VISIBLE);
+                    layout.setVisibility(View.GONE);
+                }else {
+                    pleaseAdd.setVisibility(View.GONE);
+                    layout.setVisibility(View.VISIBLE);
+                    addBean();
 
+                }
+
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+                pleaseAdd.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.GONE);
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {
@@ -94,7 +126,7 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
             case R.id.order_details_address_tv:
                 Intent intent = new Intent(this, AllMyAddressActivity.class);
                 startActivity(intent);
-                finish();
+
                 break;
             case R.id.order_details_confirm:
 

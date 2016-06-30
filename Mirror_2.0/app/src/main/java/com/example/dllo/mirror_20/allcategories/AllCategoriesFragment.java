@@ -3,6 +3,7 @@ package com.example.dllo.mirror_20.allcategories;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -15,6 +16,9 @@ import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.google.gson.Gson;
 import com.zhy.autolayout.AutoLinearLayout;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by dllo on 16/6/21.
@@ -73,10 +77,14 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
 
             }
         });
+
+
         adapter.setListener(this);
         autoLinearLayout.setOnClickListener(this);
 
     }
+
+
 
 
     //RecyclerView的点击事件
@@ -105,5 +113,6 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
 
     public interface MenuOnClickListener {
         void menuOnClick();
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.dllo.mirror_20.allcategories;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -143,6 +144,7 @@ public class WearPictureActivity extends BaseActivity implements View.OnClickLis
 
                     //设置播放是的焦点
                     wearPictureVideoView.requestFocus();
+
                     wearPictureVideoView.start();//播放
                 }
 
@@ -162,4 +164,6 @@ public class WearPictureActivity extends BaseActivity implements View.OnClickLis
 
 
     }
+
+
 }

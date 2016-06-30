@@ -124,7 +124,8 @@
             android:id="@+id/order_details_goods_iv"
             android:layout_width="220px"
             android:layout_height="match_parent"
-            android:background="@mipmap/bg" />
+            android:scaleType="fitXY"
+             />
 
         <TextView
             android:id="@+id/order_details_goods_name"
