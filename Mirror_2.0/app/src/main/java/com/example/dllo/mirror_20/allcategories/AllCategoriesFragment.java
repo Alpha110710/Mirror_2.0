@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.android.volley.VolleyError;
+import com.example.dllo.mirror_20.Bean.DBBean;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
 import com.example.dllo.mirror_20.fashion.FashionActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
+import com.example.dllo.mirror_20.sql.SQLTools;
 import com.google.gson.Gson;
 import com.zhy.autolayout.AutoLinearLayout;
 

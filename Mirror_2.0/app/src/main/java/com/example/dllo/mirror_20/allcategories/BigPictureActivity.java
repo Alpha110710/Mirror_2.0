@@ -45,7 +45,7 @@ public class BigPictureActivity extends BaseActivity implements View.OnClickList
         mWidth = getIntent().getIntExtra("width", 0);
         mHeight = getIntent().getIntExtra("height", 0);
         //自定义view
-        imageView = new SmoothImageView(BigPictureActivity.this);
+        imageView = new SmoothImageView(this);
         //自定义设置方法
         imageView.setOriginalInfo(mWidth, mHeight, mLocationX, mLocationY);
         imageView.transformIn();

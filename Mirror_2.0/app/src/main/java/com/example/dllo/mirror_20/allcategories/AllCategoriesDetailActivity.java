@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DBBean;
+import com.example.dllo.mirror_20.Bean.DBDataBean;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.Bean.EventBusBean;
 import com.example.dllo.mirror_20.R;
@@ -74,6 +75,13 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
     private String goods_price;
     private String model;
     private String product_area;
+    private String introContent;
+    private String cellHeight;
+    private String name;
+    private String location;
+    private String country;
+    private String english;
+
 
     private String goodsPic;//sun hao
     private String goodsName;//sun hao
@@ -88,8 +96,14 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
                 //解析背景图片
                 Picasso.with(AllCategoriesDetailActivity.this).load(dataAllBean.getData().getList().get(position).getData_info().getGoods_img())
                         .fit().into(allCategoriesDetailBackImg);
-
-
+                for (int i = 0; i < dataAllBean.getData().getList().get(position).getData_info().getGoods_data().size(); i++) {
+                    location = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getLocation();
+                    name = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getName();
+                    introContent = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getIntroContent();
+                    cellHeight = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getCellHeight();
+                    english = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getEnglish();
+                    country = dataAllBean.getData().getList().get(position).getData_info().getGoods_data().get(i).getCountry();
+                }
                 goods_id = dataAllBean.getData().getList().get(position).getData_info().getGoods_id();
                 goods_img = dataAllBean.getData().getList().get(position).getData_info().getGoods_img();
                 goods_name = dataAllBean.getData().getList().get(position).getData_info().getGoods_name();
@@ -116,6 +130,7 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
             headerTranslucentGoodsNameTv.setText(dataAllBean.getData().getList().get(position).getData_info().getGoods_name());
             headeTranslucentGoodsPriceTv.setText(dataAllBean.getData().getList().get(position).getData_info().getGoods_price());
         }
+
 
         @Override
         public void onFailed(VolleyError error) {
@@ -153,7 +168,6 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
         allCategoriesDetailRlayoutPictureTv = (TextView) findViewById(R.id.all_categories_detail_rlayout_picture_tv);
         allCategoriesDetailRlayoutBuyTv = (TextView) findViewById(R.id.all_categories_detail_rlayout_buy_tv);
         allCategoriesDetailRlayoutBuyCar = (TextView) findViewById(R.id.all_categories_detail_rlayout_buy_car);
-
 
 
         detailActivityOutListViewAdapter = new DetailActivityOutListViewAdapter(this);
@@ -309,22 +323,31 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
             case R.id.all_categories_detail_rlayout_buy_tv:
                 //todo:判断登录,进入购买
                 SharedPreferences getSp = getSharedPreferences("test", MODE_PRIVATE);
-                String token = getSp.getString("token", "1+");
+
+
+                String token = getSp.getString("token", "1");
                 Log.d("AllCategoriesDetailActi", token);
-                if (!token.equals("1+")) {
+                if (!token.equals("1")) {
+
                     Intent intent1 = new Intent(this, OrderDetailsActivity.class);
-                    intent1.putExtra("goodsPic",goodsPic);
-                    intent1.putExtra("goodsName",goodsName);
-                    intent1.putExtra("goodsPrice",goodsPrice);
+                    intent1.putExtra("goodsPic", goodsPic);
+                    intent1.putExtra("goodsName", goodsName);
+                    intent1.putExtra("goodsPrice", goodsPrice);
                     startActivity(intent1);
-                }else {
+                } else {
+
                     Intent intent1 = new Intent(this, LoginActivity.class);
-                    intent1.putExtra("goodsPic",goodsPic);
-                    intent1.putExtra("goodsName",goodsName);
-                    intent1.putExtra("goodsPrice",goodsPrice);
-                    intent1.putExtra("type",1);
+                    intent1.putExtra("goodsPic", goodsPic);
+                    intent1.putExtra("goodsName", goodsName);
+                    intent1.putExtra("goodsPrice", goodsPrice);
+                    intent1.putExtra("type", 1);
                     startActivity(intent1);
+
+                    Intent intent2 = new Intent(this, LoginActivity.class);
+                    startActivity(intent2);
+
                 }
+
                 break;
             case R.id.header_translucent_title_share:
                 showShare();
@@ -335,6 +358,7 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
                 setBuyCar();
                 break;
         }
+
     }
 
     public void setBuyCar() {
@@ -358,8 +382,10 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
 
-          // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
-         //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+                // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+                //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
         oks.setTitle("我是Title");
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用

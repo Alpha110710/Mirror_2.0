@@ -112,7 +112,11 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
                 networkTools.getNetworkImage(bBean.getData().getList().get(pos)
                                 .getStory_data().getImg_array().get(position),
                         fashionBackgroundImg);
+
+
             } else if (specialPos != -1) {
+
+
                 networkTools.getNetworkImage(dataAllBean.getData().getList().get(specialPos)
                                 .getData_info().getStory_data().getImg_array().get(position),
                         fashionBackgroundImg);
