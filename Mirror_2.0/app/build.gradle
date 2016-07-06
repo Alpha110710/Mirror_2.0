@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //checkReleaseBuilds就是在打包Release版本的时候进行检测，这里就直接关掉了，也可以打开，这样报错还会显示出来。关键的就是abortOnError一定要设为false，这样即使有报错也不会停止打包了。
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {

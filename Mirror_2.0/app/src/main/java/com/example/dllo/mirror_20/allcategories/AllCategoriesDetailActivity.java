@@ -261,10 +261,16 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
         allCategoriesDetailOutListView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
+//                return true;
+//                Log.d("AllCategoriesDetailActi", "allCategoriesDetailInListView.dispatchTouchEvent(event):" + allCategoriesDetailInListView.dispatchTouchEvent(event));
+//                if (!allCategoriesDetailInListView.dispatchTouchEvent(event)){
+//                    Log.d("AllCategoriesDetailActi", "aaa");
+//                }
                 return allCategoriesDetailInListView.dispatchTouchEvent(event);
             }
         });
+
+
 
 
     }

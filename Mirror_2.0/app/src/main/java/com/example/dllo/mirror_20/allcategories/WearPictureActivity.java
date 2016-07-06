@@ -1,6 +1,7 @@
 package com.example.dllo.mirror_20.allcategories;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -101,6 +102,37 @@ public class WearPictureActivity extends BaseActivity implements View.OnClickLis
     private boolean isFullscreen;
     private RelativeLayout wearPictureTitleRlayout;
     private RelativeLayout wearPictureRlayout;
+
+    /**
+     * 当屏幕旋转会走这个方法
+     * @param newConfig
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE ){
+
+            setMargins(mVideoLayout, 0, 0, 0, 0);
+
+            ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+            layoutParams.width = getWindowManager().getDefaultDisplay().getWidth();
+            layoutParams.height = getWindowManager().getDefaultDisplay().getHeight();
+
+            mVideoLayout.setLayoutParams(layoutParams);
+            wearPictureRlayout.setVisibility(View.GONE);
+            wearPictureTitleRlayout.setVisibility(View.GONE);
+        }else{
+
+            setMargins(mVideoLayout, 25, 10, 25, 10);
+
+            ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            layoutParams.height = this.cachedHeight;
+            mVideoLayout.setLayoutParams(layoutParams);
+            wearPictureTitleRlayout.setVisibility(View.VISIBLE);
+            wearPictureRlayout.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void initActivity() {
@@ -256,37 +288,38 @@ public class WearPictureActivity extends BaseActivity implements View.OnClickLis
     }
 
 
+
     @Override
     public void onScaleChange(boolean isFullscreen) {
-        this.isFullscreen = isFullscreen;
-        if (isFullscreen) {
-
-            setMargins(mVideoLayout, 0, 0, 0, 0);
-
-            ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
-            layoutParams.width = getWindowManager().getDefaultDisplay().getWidth();
-            layoutParams.height = getWindowManager().getDefaultDisplay().getHeight();
-
-            mVideoLayout.setLayoutParams(layoutParams);
-            wearPictureRlayout.setVisibility(View.GONE);
-            wearPictureTitleRlayout.setVisibility(View.GONE);
-
-
-        } else {
-
-            setMargins(mVideoLayout, 25, 10, 25, 10);
-
-            ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
-            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            layoutParams.height = this.cachedHeight;
-            mVideoLayout.setLayoutParams(layoutParams);
-            wearPictureTitleRlayout.setVisibility(View.VISIBLE);
-            wearPictureRlayout.setVisibility(View.VISIBLE);
-
-
-        }
-
-        switchTitleBar(!isFullscreen);
+//        this.isFullscreen = isFullscreen;
+//        if (isFullscreen) {
+//
+//            setMargins(mVideoLayout, 0, 0, 0, 0);
+//
+//            ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+//            layoutParams.width = getWindowManager().getDefaultDisplay().getWidth();
+//            layoutParams.height = getWindowManager().getDefaultDisplay().getHeight();
+//
+//            mVideoLayout.setLayoutParams(layoutParams);
+//            wearPictureRlayout.setVisibility(View.GONE);
+//            wearPictureTitleRlayout.setVisibility(View.GONE);
+//
+//
+//        } else {
+//
+//            setMargins(mVideoLayout, 25, 10, 25, 10);
+//
+//            ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+//            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//            layoutParams.height = this.cachedHeight;
+//            mVideoLayout.setLayoutParams(layoutParams);
+//            wearPictureTitleRlayout.setVisibility(View.VISIBLE);
+//            wearPictureRlayout.setVisibility(View.VISIBLE);
+//
+//
+//        }
+//
+//        switchTitleBar(!isFullscreen);
     }
 
     private void switchTitleBar(boolean show) {
