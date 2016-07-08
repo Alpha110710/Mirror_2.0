@@ -323,10 +323,8 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
             case R.id.all_categories_detail_rlayout_buy_tv:
                 //todo:判断登录,进入购买
                 SharedPreferences getSp = getSharedPreferences("test", MODE_PRIVATE);
-
-
                 String token = getSp.getString("token", "1");
-                Log.d("AllCategoriesDetailActi", token);
+
                 if (!token.equals("1")) {
 
                     Intent intent1 = new Intent(this, OrderDetailsActivity.class);
@@ -336,15 +334,14 @@ public class AllCategoriesDetailActivity extends BaseActivity implements View.On
                     startActivity(intent1);
                 } else {
 
-                    Intent intent1 = new Intent(this, LoginActivity.class);
-                    intent1.putExtra("goodsPic", goodsPic);
-                    intent1.putExtra("goodsName", goodsName);
-                    intent1.putExtra("goodsPrice", goodsPrice);
-                    intent1.putExtra("type", 1);
-                    startActivity(intent1);
-
                     Intent intent2 = new Intent(this, LoginActivity.class);
+                    intent2.putExtra("goodsPic", goodsPic);
+                    intent2.putExtra("goodsName", goodsName);
+                    intent2.putExtra("goodsPrice", goodsPrice);
+                    intent2.putExtra("type", 1);
                     startActivity(intent2);
+
+
 
                 }
 

@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <com.example.dllo.mirror_20.networktools.MyNetworkImageView
                 android:id="@+id/all_categories_rv_item_iv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -60,9 +60,7 @@ public class SQLTools {
 
     public ArrayList<DBBean> querAll() {
         ArrayList<DBBean> bean = new ArrayList<>();
-
         Cursor cursor = database.query(SQLValues.TABLE_NAME, null, null, null, null, null, null);
-
         if (cursor != null) {
             while (cursor.moveToNext()) {
 

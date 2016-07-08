@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         //注册EventBus
         EventBus.getDefault().register(this);
 
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
 
         mainVerticalViewPagerAdapter.setFragments(fragments);
         mainVerticalViewpager.setAdapter(mainVerticalViewPagerAdapter);
+
 
     }
 
@@ -106,18 +109,22 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
     }
 
 
+
+
     //实现对应每个viewPager item的左上角点击监听
     @Override
     public void menuOnClick() {
-        menuFragment = new MenuFragment();
 
+        menuFragment = new MenuFragment();
         //替换为menufragment 并将viewpager的当前页position传入
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, menuFragment).commit();
+
         mainVerticalViewpager.setVisibility(View.GONE);
         int pos = mainVerticalViewpager.getCurrentItem();
         Bundle bundle = new Bundle();
         bundle.putInt("pos", pos);
         menuFragment.setArguments(bundle);
+
 
     }
 
@@ -152,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
     public void menuDetailOnClick(int pos) {
         mainVerticalViewpager.setVisibility(View.VISIBLE);
         getSupportFragmentManager().beginTransaction().hide(menuFragment).commit();
+
         mainVerticalViewpager.setCurrentItem(pos);
 
     }
@@ -179,4 +187,6 @@ public class MainActivity extends AppCompatActivity implements AllCategoriesFrag
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+
 }

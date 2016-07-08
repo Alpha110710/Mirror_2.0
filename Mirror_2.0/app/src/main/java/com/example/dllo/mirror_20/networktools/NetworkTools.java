@@ -11,6 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.example.dllo.mirror_20.R;
 
@@ -28,6 +29,10 @@ public class NetworkTools {
     public NetworkTools() {
         requestQueue = VolleySingleton.getInstance().getRequestQueue();
         loader = VolleySingleton.getInstance().getLoader();
+    }
+
+    public ImageLoader getLoader() {
+        return loader;
     }
 
     public void getNetworkData(String url, final NetworkListener listener) {
@@ -77,13 +82,12 @@ public class NetworkTools {
 
     public void getNetworkImage(String url, ImageView imageView, ProgressBar progressBar) {
         loader.get(url, new ImageListenerWithAlpha(R.mipmap.grey_background, R.mipmap.grey_background, imageView, progressBar));
-
     }
 
 
     class ImageListenerWithAlpha implements ImageLoader.ImageListener {
         int defaultIma, errorIma;
-        ImageView imageView;
+      ImageView imageView;
         ProgressBar bar;
 
 

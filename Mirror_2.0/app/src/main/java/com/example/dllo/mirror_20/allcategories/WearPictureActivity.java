@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.dllo.mirror_20.Bean.WearPictureBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
@@ -35,7 +36,8 @@ public class WearPictureActivity extends BaseActivity implements View.OnClickLis
 
     private VideoView wearPictureVideoView;
     private ListView wearPictureListView;
-    private ImageView pictureHeaderPictureImg, pictureHeaderPauseImg;
+    private NetworkImageView pictureHeaderPictureImg;
+    private ImageView pictureHeaderPauseImg;
     private NetworkTools networkTools;
     private String url = "http://api.mirroreye.cn/index.php/index/mrtj";//post请求 url 返回数据里有视频接口
     private HashMap<String, String> map;
@@ -113,7 +115,7 @@ public class WearPictureActivity extends BaseActivity implements View.OnClickLis
         //绑定头布局组件
         View view = LayoutInflater.from(this).inflate(R.layout.item_listview_wear_picture_header, null);
         wearPictureVideoView = (VideoView) view.findViewById(R.id.wear_picture_video_view);
-        pictureHeaderPictureImg = (ImageView) view.findViewById(R.id.picture_header_picture_img);
+        pictureHeaderPictureImg = (NetworkImageView) view.findViewById(R.id.picture_header_picture_img);
         pictureHeaderPauseImg = (ImageView) view.findViewById(R.id.picture_header_pause_img);
 
 

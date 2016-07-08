@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.allcategories.MyRvOnClickListener;
+import com.example.dllo.mirror_20.networktools.MyNetworkImageView;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -49,9 +51,10 @@ public class ProjectShareRvAdapter extends RecyclerView.Adapter<ProjectShareRvAd
     @Override
     public void onBindViewHolder(final ProjectShareViewHolder holder, int position) {
         holder.bar.setVisibility(View.VISIBLE);
-        tools.getNetworkImage(bean.getData().getList().get(position).getStory_img(), holder.imageView,holder.bar);
+//        tools.getNetworkImage(bean.getData().getList().get(position).getStory_img(), holder.imageView,holder.bar);
         holder.textView.setText(bean.getData().getList().get(position).getStory_title());
 
+        holder.imageView.setImageUrl(bean.getData().getList().get(position).getStory_img(),tools.getLoader(),holder.bar);
         if (listener != null) {
             holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,7 +72,7 @@ public class ProjectShareRvAdapter extends RecyclerView.Adapter<ProjectShareRvAd
     }
 
     class ProjectShareViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        MyNetworkImageView imageView;
         TextView textView;
         AutoLinearLayout linearLayout;
         ProgressBar bar;
@@ -79,7 +82,7 @@ public class ProjectShareRvAdapter extends RecyclerView.Adapter<ProjectShareRvAd
             AutoUtils.autoSize(itemView);
             linearLayout = (AutoLinearLayout) itemView.findViewById(R.id.project_share_rv_item_ll);
             textView = (TextView) itemView.findViewById(R.id.project_share_rv_item_introduce);
-            imageView = (ImageView) itemView.findViewById(R.id.project_share_rv_item_iv);
+            imageView = (MyNetworkImageView) itemView.findViewById(R.id.project_share_rv_item_iv);
             bar = (ProgressBar) itemView.findViewById(R.id.project_share_rv_item_pb);
         }
     }

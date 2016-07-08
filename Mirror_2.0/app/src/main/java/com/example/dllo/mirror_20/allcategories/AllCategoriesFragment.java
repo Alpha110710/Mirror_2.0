@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.mirror_20.Bean.DBBean;
@@ -13,6 +14,8 @@ import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseFragment;
 import com.example.dllo.mirror_20.fashion.FashionActivity;
+import com.example.dllo.mirror_20.main.MainActivity;
+import com.example.dllo.mirror_20.networktools.JudgeWifiOpenOrClose;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.example.dllo.mirror_20.sql.SQLTools;
@@ -32,6 +35,7 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
     private RecyclerView recyclerView;
     private NetworkTools tools;
     private DataAllBean bean;
+    MenuOnClickListener listener;
     private ProgressBar progressBar;
     private AllCategoriesRVAdapter adapter;
     private AutoLinearLayout autoLinearLayout;
@@ -92,17 +96,21 @@ public class AllCategoriesFragment extends BaseFragment implements MyRvOnClickLi
     //RecyclerView的点击事件
     @Override
     public void onClick(int position) {
-        if (bean.getData().getList().get(position).getType().equals("1") ){
-            Intent intent = new Intent(context, AllCategoriesDetailActivity.class);
-            intent.putExtra("position", position);
-            startActivity(intent);
+
+        if (JudgeWifiOpenOrClose.isHaveInternet(context)) {
+            if (bean.getData().getList().get(position).getType().equals("1")) {
+                Intent intent = new Intent(context, AllCategoriesDetailActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(context, FashionActivity.class);
+                intent.putExtra("pos", position);
+                startActivity(intent);
+            }
+
         }else {
-            Intent intent = new Intent(context, FashionActivity.class);
-            intent.putExtra("pos", position);
-            startActivity(intent);
+            Toast.makeText(context, "确认网络是否开启", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     //fragment头标题的点击事件

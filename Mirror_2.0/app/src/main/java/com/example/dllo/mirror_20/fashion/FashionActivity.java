@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
@@ -28,7 +29,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  */
 public class FashionActivity extends BaseActivity implements View.OnClickListener {
     private VerticalViewPager verticalViewPager;
-    private ImageView fashionBackgroundImg;
+    private NetworkImageView fashionBackgroundImg;
     private Button close, share;
     private ArrayList<Fragment> fragments;
     private NetworkTools networkTools;
@@ -53,9 +54,11 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
                 fragments.add(FashionFragment.createFragment(bBean.getData().getList().get(pos).getStory_data().getText_array().get(i)));
 
                 //解析背景里面的图片
-                networkTools.getNetworkImage(bBean.getData().getList().get(pos)
-                                .getStory_data().getImg_array().get(0),
-                        fashionBackgroundImg);
+//                networkTools.getNetworkImage(bBean.getData().getList().get(pos)
+//                                .getStory_data().getImg_array().get(0),
+//                        fashionBackgroundImg);
+                fashionBackgroundImg.setImageUrl(bBean.getData().getList().get(pos)
+                                .getStory_data().getImg_array().get(0),networkTools.getLoader());
 
             }
 
@@ -109,10 +112,11 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
 
             if (pos != -1) {
 
-                networkTools.getNetworkImage(bBean.getData().getList().get(pos)
-                                .getStory_data().getImg_array().get(position),
-                        fashionBackgroundImg);
-
+//                networkTools.getNetworkImage(bBean.getData().getList().get(pos)
+//                                .getStory_data().getImg_array().get(position),
+//                        fashionBackgroundImg);
+                fashionBackgroundImg.setImageUrl(bBean.getData().getList().get(pos)
+                                .getStory_data().getImg_array().get(position),networkTools.getLoader());
 
             } else if (specialPos != -1) {
 
@@ -139,7 +143,7 @@ public class FashionActivity extends BaseActivity implements View.OnClickListene
         verticalViewPager = (VerticalViewPager) findViewById(R.id.fashion_vertical_viewpager);
         close = (Button) findViewById(R.id.fashion_close);
         share = (Button) findViewById(R.id.fashion_share);
-        fashionBackgroundImg = (ImageView) findViewById(R.id.fashion_background_img);
+        fashionBackgroundImg = (NetworkImageView) findViewById(R.id.fashion_background_img);
 
         Intent intent = getIntent();
         //接收传过来的position值  这个position是用来确定第几个item点击的

@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.dllo.mirror_20.Bean.DBBean;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.allcategories.MyRvOnClickListener;
+import com.example.dllo.mirror_20.networktools.MyNetworkImageView;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -62,7 +64,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         String url=data.get(position).getGoods_img();
-        tools.getNetworkImage(url, holder.imageView,holder.bar);
+//        tools.getNetworkImage(url, holder.imageView,holder.bar);
+        holder.imageView.setImageUrl(url,tools.getLoader(),null);
+        holder.imageView.setDefaultImageResId(R.mipmap.grey_background);
+        holder.imageView.setErrorImageResId(R.mipmap.ic_launcher);
+
         holder.englishTv.setText(data.get(position).getGoods_name());
         holder.moneyTv.setText(data.get(position).getGoods_price());
         holder.originTv.setText(data.get(position).getProduct_area());
@@ -83,7 +89,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     }
 
     class MyShoppingCartViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        MyNetworkImageView imageView;
         TextView englishTv, moneyTv, originTv, introduceTv;
         AutoRelativeLayout layout;
         AutoLinearLayout linearLayout;
@@ -92,7 +98,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         public MyShoppingCartViewHolder(View itemView) {
             super(itemView);
             AutoUtils.autoSize(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.all_categories_rv_item_iv);
+            imageView = (MyNetworkImageView) itemView.findViewById(R.id.all_categories_rv_item_iv);
             englishTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_english);
             moneyTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_money);
             originTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_origin);

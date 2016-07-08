@@ -57,19 +57,30 @@ public class ShoppingCartFragment extends BaseFragment implements View.OnClickLi
     public void initData() {
 
         autoRelativeLayout.setOnClickListener(this);
-        progressBar.setVisibility(View.VISIBLE);
+
         sqlTools = new SQLTools(context);
         data = new ArrayList<>();
         shoppingCartAdapter = new ShoppingCartAdapter(context);
         data = sqlTools.querAll();
-        shoppingCartAdapter.setData(data);
+        if (data.size() != 0){
+            recyclerView.setVisibility(View.VISIBLE);
+            relativeLayoutPic.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+            shoppingCartAdapter.setData(data);
 
-        LinearLayoutManager manager = new LinearLayoutManager(context);
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(shoppingCartAdapter);
+            LinearLayoutManager manager = new LinearLayoutManager(context);
+            manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            recyclerView.setLayoutManager(manager);
+            recyclerView.setAdapter(shoppingCartAdapter);
 
-        progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+        }else {
+            recyclerView.setVisibility(View.GONE);
+            relativeLayoutPic.setVisibility(View.VISIBLE);
+
+        }
+
+
 
         shoppingCartAdapter.setListener(new MyRvOnClickListener() {
             @Override

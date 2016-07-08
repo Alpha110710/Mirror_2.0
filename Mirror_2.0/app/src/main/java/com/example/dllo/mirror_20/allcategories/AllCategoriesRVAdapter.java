@@ -2,6 +2,7 @@ package com.example.dllo.mirror_20.allcategories;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.dllo.mirror_20.Bean.DataAllBean;
 import com.example.dllo.mirror_20.R;
 
+import com.example.dllo.mirror_20.networktools.MyNetworkImageView;
 import com.example.dllo.mirror_20.networktools.NetworkTools;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -58,7 +61,13 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
             case "1":
                 holder.layout.setVisibility(View.VISIBLE);
                 holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                tools.getNetworkImage(url, holder.imageView,holder.bar);
+//                tools.getNetworkImage(url, holder.imageView,holder.bar);
+
+                holder.imageView.setDefaultImageResId(R.mipmap.grey_background);
+                holder.imageView.setErrorImageResId(R.mipmap.ic_launcher);
+                holder.imageView.setImageUrl(url,tools.getLoader(),holder.bar);
+
+
 
                 holder.englishTv.setText(bean.getData().getList().get(position).getData_info().getGoods_name());
                 holder.moneyTv.setText("¥" + bean.getData().getList().get(position).getData_info().getGoods_price());
@@ -67,8 +76,10 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
                 break;
             case "2":
                 holder.layout.setVisibility(View.GONE);
-                tools.getNetworkImage(url2, holder.imageView,holder.bar);
-
+//                tools.getNetworkImage(url2, holder.imageView,holder.bar);
+                holder.imageView.setDefaultImageResId(R.mipmap.grey_background);
+                holder.imageView.setErrorImageResId(R.mipmap.ic_launcher);
+                holder.imageView.setImageUrl(url2,tools.getLoader(),holder.bar);
                 holder.introduceTv.setText(bean.getData().getList().get(position).getData_info().getStory_title());
 
                 break;
@@ -91,7 +102,7 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+       MyNetworkImageView imageView;
         TextView englishTv, moneyTv, originTv, introduceTv;
         AutoRelativeLayout layout;
         AutoLinearLayout linearLayout;
@@ -100,7 +111,7 @@ public class AllCategoriesRVAdapter extends RecyclerView.Adapter<AllCategoriesRV
         public MyViewHolder(View itemView) {
             super(itemView);
             AutoUtils.autoSize(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.all_categories_rv_item_iv);
+            imageView = (MyNetworkImageView) itemView.findViewById(R.id.all_categories_rv_item_iv);
             englishTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_english);
             moneyTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_money);
             originTv = (TextView) itemView.findViewById(R.id.all_categories_rv_item_origin);

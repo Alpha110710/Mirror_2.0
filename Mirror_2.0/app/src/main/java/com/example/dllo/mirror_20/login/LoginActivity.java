@@ -73,6 +73,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         Intent intent = getIntent();
         phone = intent.getStringExtra("phoneNumber");
         passwords = intent.getStringExtra("password");
+
         phoneNumber.setText(phone);
         password.setText(passwords);
         //checkBox监听事件
@@ -179,7 +180,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             EventBusBean bean=new EventBusBean("购物车");
                                             eventBus.post(bean);
 
-                                            if (getIntent().getStringExtra("type").equals("1")) {
+                                            if ( getIntent().getIntExtra("type",010)==1) {
                                                 Intent orderDetaIntent = new Intent(LoginActivity.this, OrderDetailsActivity.class);
                                                 orderDetaIntent.putExtra("goodsPic",getIntent().getStringExtra("goodsPic"));
                                                 orderDetaIntent.putExtra("goodsName",getIntent().getStringExtra("goodsName"));

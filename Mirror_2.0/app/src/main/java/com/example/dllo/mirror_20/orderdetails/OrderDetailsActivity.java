@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.dllo.mirror_20.R;
 import com.example.dllo.mirror_20.base.BaseActivity;
 import com.example.dllo.mirror_20.networktools.NetworkListener;
@@ -27,7 +28,8 @@ import java.util.Map;
 public class OrderDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView confirm, addAddress, goodsName, money, recipient, address, number, pleaseAdd;
-    private ImageView imageView, back;
+    private ImageView  back;
+    private ImageView imageView;
     private NetworkTools tools;
     private AutoLinearLayout layout;
     private String url = "http://api.mirroreye.cn/index.php/user/address_list";

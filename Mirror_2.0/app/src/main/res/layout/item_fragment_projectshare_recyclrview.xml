@@ -10,7 +10,7 @@
         android:layout_width="500px"
         android:layout_height="750px">
 
-        <ImageView
+        <com.example.dllo.mirror_20.networktools.MyNetworkImageView
             android:id="@+id/project_share_rv_item_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
