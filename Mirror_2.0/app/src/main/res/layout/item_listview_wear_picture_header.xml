@@ -1,30 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp">
+
+
+    <FrameLayout
+        android:id="@+id/video_layout"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/black">
+
+        <com.universalvideoview.UniversalVideoView
+            android:id="@+id/mVideoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:uvv_autoRotation="true"
+            app:uvv_fitXY="true" />
+
+        <com.universalvideoview.UniversalMediaController
+            android:id="@+id/mMediaController"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:uvv_scalable="true" />
+    </FrameLayout>
 
     <RelativeLayout
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp">
-
-        <VideoView
-            android:id="@+id/wear_picture_video_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:fitsSystemWindows="true"
-            android:visibility="gone" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/picture_header_picture_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/picture_header_pause_img"
@@ -34,6 +53,7 @@
             android:layout_marginTop="75dp"
             android:src="@mipmap/biz_video_list_play_icon_big" />
     </RelativeLayout>
+
 </RelativeLayout>
 
 

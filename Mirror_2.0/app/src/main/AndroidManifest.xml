@@ -15,6 +15,7 @@
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
 
     <application
         android:name=".base.App"
@@ -41,14 +42,17 @@
         <activity android:name=".fashion.FashionActivity" />
         <activity
             android:name=".allcategories.WearPictureActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:process=":remote" />
         <activity
             android:name=".allcategories.BigPictureActivity"
             android:process=":remote" />
 
 
-        <activity android:name=".orderdetails.OrderDetailsActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".orderdetails.OrderDetailsActivity"
+            android:launchMode="singleTask" />
+
         <activity android:name=".orderdetails.AllMyAddressActivity" />
         <activity android:name=".orderdetails.AddOrModifyAddressActivity" />
 
